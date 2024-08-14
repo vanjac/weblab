@@ -38,6 +38,14 @@ const shortcuts = [
     // Insert
     { key: 'L', command: 'insertUnorderedList' },
     { key: 'h', command: 'fromHTML' },
+    // Style
+    { key: '1', command: 'H1' },
+    { key: '2', command: 'H2' },
+    { key: '3', command: 'H3' },
+    { key: '4', command: 'H4' },
+    { key: '5', command: 'H5' },
+    { key: '6', command: 'H6' },
+    { key: '0', command: 'DIV' },
     // Already handled by browser: undo, redo, cut, copy, paste, delete, selectAll, ...
 ]
 
@@ -57,9 +65,12 @@ function handleCommand(command) {
         'insertOrderedList', 'insertUnorderedList',
         // Already handled by browser: forwardDelete, insertText, insertImage
     ]
+    let blockTags = ['DIV', 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6']
 
     if (simpleCommands.indexOf(command) != -1) {
         iframe.contentDocument.execCommand(command)
+    } else if (blockTags.indexOf(command) != -1) {
+        iframe.contentDocument.execCommand('formatBlock', false, command)
     } else if (command == 'fromHTML') {
         let html = iframe.contentDocument.getSelection().toString()
         iframe.contentDocument.execCommand('insertHTML', false, html)
@@ -172,6 +183,7 @@ window.addEventListener('load', () => {
     addMenuListener(document.querySelector('#editMenu'), handleCommand)
     addMenuListener(document.querySelector('#formatMenu'), handleCommand)
     addMenuListener(document.querySelector('#insertMenu'), handleCommand)
+    addMenuListener(document.querySelector('#styleMenu'), handleCommand)
 
     titleInput.addEventListener('input', () => {
         iframe.contentDocument.title = titleInput.value
