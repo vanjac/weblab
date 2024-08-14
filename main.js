@@ -90,7 +90,7 @@ function handleCommand(command) {
         fileInput.click()
     } else if (command == 'save') {
         let blob = new Blob([documentHTML(iframe.contentDocument)], {type: 'text/plain'})
-        saveFile(blob, 'untitled.html')
+        saveFile(blob, (iframe.contentDocument.title || 'untitled') + '.html')
     } else if (command == 'print') {
         iframe.contentWindow.print()
     }
