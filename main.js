@@ -65,7 +65,7 @@ function handleCommand(command) {
         'removeFormat',
         // Already handled by browser: forwardDelete, insertText, insertImage
     ]
-    let blockTags = ['DIV', 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6']
+    let blockTags = ['DIV', 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'PRE']
 
     if (simpleCommands.indexOf(command) != -1) {
         iframe.contentDocument.execCommand(command)
@@ -78,6 +78,11 @@ function handleCommand(command) {
         let content = iframe.contentDocument.getSelection().toString()
         iframe.contentDocument.execCommand('insertHTML', false,
             `<table><tr><td>${content}</td></tr></table>`)
+    } else if (command == 'fontName') {
+        let fontName = prompt('Font name:')
+        if (fontName != null) {
+            iframe.contentDocument.execCommand('fontName', false, fontName)
+        }
     } else if (command == 'new') {
         iframe.srcdoc = doctype
     } else if (command == 'open') {
