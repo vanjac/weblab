@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "checkJs": true,
+        "skipLibCheck": false,
+        "noEmit": true,
+
+        "strict": true,
+        "strictNullChecks": false,
+        "noImplicitReturns": true,
+        "noImplicitOverride": true,
+    },
+}

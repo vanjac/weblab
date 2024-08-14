@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SoftEdit</title>
+    <script src="main.js"></script>
+  </head>
+  <body style="margin: 0; width: 100%; height: 100%; overflow: hidden; position: fixed; display: flex; flex-direction: column">
+    <div>
+      <select id="fileMenu" autocomplete="off">
+        <option selected disabled hidden>File</option>
+        <option value="new">New</option>
+        <option value="open">Open</option>
+        <option value="save">Save</option>
+        <option value="print">Print</option>
+      </select>
+      <select id="editMenu" autocomplete="off">
+        <option selected disabled hidden>Edit</option>
+        <option value="undo">Undo</option>
+        <option value="redo">Redo</option>
+        <option value="cut">Cut</option>
+        <option value="copy">Copy</option>
+        <!-- <option value="paste">Paste</option> -->
+        <option value="delete">Clear</option>
+        <option value="selectAll">Select All</option>
+      </select>
+      <select id="formatMenu" autocomplete="off">
+        <option selected disabled hidden>Format</option>
+        <option value="bold">Bold</option>
+        <option value="italic">Italic</option>
+        <option value="underline">Underline</option>
+        <option value="strikeThrough">Strikethrough</option>
+        <option value="subscript">Subscript</option>
+        <option value="superscript">Superscript</option>
+        <hr>
+        <option value="justifyLeft">Align Left</option>
+        <option value="justifyCenter">Center</option>
+        <option value="justifyRight">Align Right</option>
+        <option value="justifyFull">Justify</option>
+        <hr>
+        <option value="indent">Indent</option>
+        <option value="outdent">Outdent</option>
+        <hr>
+        <option value="removeFormat">Clear Formatting</option>
+      </select>
+      <select id="insertMenu" autocomplete="off">
+        <option selected disabled hidden>Insert</option>
+        <option value="insertOrderedList">Numbers</option>
+        <option value="insertUnorderedList">Bullets</option>
+        <option value="insertTable">Table</option>
+        <hr>
+        <option value="fromHTML">From HTML</option>
+      </select>
+    </div>
+    <div>
+      <label for="title">Title:</label>
+      <input id="title">
+    </div>
+    <iframe id="document" srcdoc="<!DOCTYPE html>" style="flex-grow: 1"></iframe>
+    <input id="file" type="file" accept=".html,.htm,.txt,text/html,text/plain" autocomplete="off" hidden>
+    <a id="download" hidden></a>
+  </body>
+</html>

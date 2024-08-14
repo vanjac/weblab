@@ -1,0 +1,20 @@
+{
+    "env": {
+        "browser": true,
+        "es2020": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-var": "error",
+        "curly": "error",
+        "strict": ["error", "global"],
+        // Deprecated stylistic rules (TODO)
+        "semi": ["error", "never", {"beforeStatementContinuationChars": "always"} ],
+        "no-extra-semi": "off",
+        // TypeScript handles these:
+        "no-undef": "off",
+        "no-unused-vars": "off",
+        // annoying:
+        "no-empty": "off"
+    }
+}
