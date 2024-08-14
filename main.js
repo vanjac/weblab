@@ -22,6 +22,9 @@ const shortcuts = [
     { key: 'o', command: 'open' },
     { key: 's', command: 'save' },
     { key: 'p', command: 'print' },
+    // Insert
+    { key: 'L', command: 'insertUnorderedList' },
+    { key: 'h', command: 'fromHTML' },
     // Format
     { key: 'b', command: 'bold' },
     { key: 'i', command: 'italic' },
@@ -35,9 +38,6 @@ const shortcuts = [
     { key: 'm', command: 'indent' },
     { key: 'M', command: 'outdent' },
     { key: 'q', command: 'removeFormat' },
-    // Insert
-    { key: 'L', command: 'insertUnorderedList' },
-    { key: 'h', command: 'fromHTML' },
     // Style
     { key: '1', command: 'H1' },
     { key: '2', command: 'H2' },
@@ -56,13 +56,13 @@ function handleCommand(command) {
     let simpleCommands = [
         // Edit
         'undo', 'redo', 'cut', 'copy', 'paste', 'delete', 'selectAll',
+        // Insert
+        'insertOrderedList', 'insertUnorderedList', 'insertHorizontalRule',
         // Format
         'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript',
         'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
         'indent', 'outdent',
         'removeFormat',
-        // Insert
-        'insertOrderedList', 'insertUnorderedList',
         // Already handled by browser: forwardDelete, insertText, insertImage
     ]
     let blockTags = ['DIV', 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6']
@@ -181,8 +181,8 @@ window.addEventListener('load', () => {
 
     addMenuListener(document.querySelector('#fileMenu'), handleCommand)
     addMenuListener(document.querySelector('#editMenu'), handleCommand)
-    addMenuListener(document.querySelector('#formatMenu'), handleCommand)
     addMenuListener(document.querySelector('#insertMenu'), handleCommand)
+    addMenuListener(document.querySelector('#formatMenu'), handleCommand)
     addMenuListener(document.querySelector('#styleMenu'), handleCommand)
 
     titleInput.addEventListener('input', () => {
