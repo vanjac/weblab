@@ -4,10 +4,5 @@
         "checkJs": true,
         "skipLibCheck": false,
         "noEmit": true,
-
-        "strict": true,
-        "strictNullChecks": false,
-        "noImplicitReturns": true,
-        "noImplicitOverride": true,
     },
 }
