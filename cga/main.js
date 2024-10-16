@@ -1,4 +1,4 @@
-'use strict'
+import * as $array from '../lib/array.js'
 
 const width = 80
 const height = 25
@@ -14,12 +14,12 @@ const palette = Object.freeze([
 export class TerminalDisplay extends HTMLElement {
     constructor() {
         super()
-        /** @private @type {string[]} */
-        this._chars = [...Array(height)].fill(' '.repeat(width))
-        /** @private @type {number[][]} */
-        this._fgCols = [...Array(height)].map(() => [...Array(width).fill(15)])
-        /** @private @type {number[][]} */
-        this._bgCols = [...Array(height)].map(() => [...Array(width).fill(0)])
+        /** @private */
+        this._chars = $array.repeat(height, ' '.repeat(width))
+        /** @private */
+        this._fgCols = $array.seq(height, () => $array.repeat(width, 15))
+        /** @private */
+        this._bgCols = $array.seq(height, () => $array.repeat(width, 0))
     }
 
     /**
