@@ -1,4 +1,4 @@
-'use strict'
+export default null
 
 const doctype = '<!DOCTYPE html>'
 

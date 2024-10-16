@@ -11,7 +11,7 @@ const palette = Object.freeze([
     '#FF5555', '#FF55FF', '#FFFF55', '#FFFFFF',
 ])
 
-class TerminalDisplay extends HTMLElement {
+export class TerminalDisplay extends HTMLElement {
     constructor() {
         super()
         /** @private @type {string[]} */
