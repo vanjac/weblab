@@ -1,4 +1,4 @@
-export default null
+import * as $file from '../lib/file.js'
 
 const doctype = '<!DOCTYPE html>'
 
@@ -6,8 +6,6 @@ const doctype = '<!DOCTYPE html>'
 let iframe
 /** @type {HTMLInputElement} */
 let titleInput
-/** @type {HTMLInputElement} */
-let fileInput
 
 /**
  * @typedef {object} KeyboardShortcut
@@ -86,11 +84,12 @@ function handleCommand(command) {
     } else if (command == 'new') {
         iframe.srcdoc = doctype
     } else if (command == 'open') {
-        fileInput.value = null
-        fileInput.click()
+        $file.pickFiles('.html,.htm,.txt,text/html,text/plain')
+            .then(files => openFile(files[0]))
+            .catch(() => {})
     } else if (command == 'save') {
         let blob = new Blob([documentHTML(iframe.contentDocument)], {type: 'text/plain'})
-        saveFile(blob, (iframe.contentDocument.title || 'untitled') + '.html')
+        $file.download(blob, (iframe.contentDocument.title || 'untitled') + '.html')
     } else if (command == 'print') {
         iframe.contentWindow.print()
     }
@@ -141,20 +140,6 @@ function openFile(blob) {
 }
 
 /**
- * @param {Blob} blob
- * @param {string} name
- */
-function saveFile(blob, name) {
-    /** @type {HTMLAnchorElement} */
-    let downloadLink = document.querySelector('#download')
-    let url = URL.createObjectURL(blob)
-    downloadLink.href = url
-    downloadLink.download = name
-    downloadLink.click()
-    URL.revokeObjectURL(url)
-}
-
-/**
  * @param {Document} document
  */
 function documentHTML(document) {
@@ -192,12 +177,5 @@ window.addEventListener('load', () => {
 
     titleInput.addEventListener('input', () => {
         iframe.contentDocument.title = titleInput.value
-    })
-
-    fileInput = document.querySelector('#file')
-    fileInput.addEventListener('change', () => {
-        if (fileInput.files.length == 1) {
-            openFile(fileInput.files[0])
-        }
     })
 })
