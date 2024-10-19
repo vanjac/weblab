@@ -20,6 +20,7 @@
         "no-unused-vars": "off",
         // annoying:
         "no-empty": "off",
-        "no-constant-condition": "off"
+        "no-constant-condition": "off",
+        "no-debugger": "off"
     }
 }
