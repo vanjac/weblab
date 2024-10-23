@@ -1,2 +1,10 @@
 <!DOCTYPE html>
 <title>WEBLAB</title>
+<script>
+  (function() {
+    let path = new URLSearchParams(window.location.search).get('load')
+    if (path) {
+      import(`./${path}.js`).then(m => window.module = m)
+    }
+  })()
+</script>
