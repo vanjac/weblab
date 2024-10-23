@@ -5,7 +5,7 @@ varying vec2 vTexCoord0;
 
 uniform sampler2D uTexture;
 
-float CELL = 1.0 / 1024.0;
+float CELL = 1.0 / 768.0;
 
 vec4 STATE0 = vec4(0, 0, 0, 1);
 vec4 STATE1 = vec4(1, 0, 0, 1);

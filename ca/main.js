@@ -2,10 +2,9 @@ import * as $dom from '../lib/dom.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
 import * as $async from '../lib/async.js'
-import * as $canvas from '../lib/canvas.js'
 
-const width = 1024
-const height = 1024
+const width = 768
+const height = 768
 
 function initialPattern() {
     let canvas = $dom.create('canvas', {width, height})
@@ -13,8 +12,8 @@ function initialPattern() {
     ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, width, height)
     ctx.fillStyle = 'red'
-    ctx.lineWidth = 3
-    ctx.fill($canvas.circle(width/2, height/2, 1))
+    ctx.fillRect(width/2 - 1, height/2 - 1, 2, 2)
+    // ctx.fillRect(width/2 + 1, height/2 - 1, 1, 1)
     return canvas
 }
 
