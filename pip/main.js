@@ -13,6 +13,7 @@ export const c = {
     sqSpin: .0002,
     sqScale: .5,
     sqAlpha: .5,
+    hueRot: -15,
 }
 
 async function main() {
@@ -22,10 +23,10 @@ async function main() {
     let bgCanvas = $dom.create('canvas', {width, height})
     let bgCtx = bgCanvas.getContext('2d')
 
-    ctx.filter = 'hue-rotate(-15deg)'
     while (true) {
         let time = await $async.nextFrame()
 
+        ctx.filter = `hue-rotate(${c.hueRot}deg)`
         ctx.globalAlpha = c.bgAlpha
         ctx.fillStyle = c.bgCol
         ctx.fillRect(0, 0, width, height)
