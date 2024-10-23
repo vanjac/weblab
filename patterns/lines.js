@@ -5,7 +5,6 @@ const width = 400
 const height = 400
 
 async function main() {
-    document.body.style.backgroundColor = 'black'
     let canvas = $dom.create('canvas', {width, height}, document.body)
     let ctx = canvas.getContext('2d')
     ctx.filter = 'blur(1px) brightness(200%)'
