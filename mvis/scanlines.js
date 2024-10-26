@@ -15,10 +15,16 @@ const sampleSize = texWidth * texHeight
 const numChannels = 2
 
 async function main() {
+    let input = $dom.create('input', {type: 'file', accept: 'audio/*'}, document.body)
+
     let src = new URLSearchParams(window.location.search).get('file')
     let audio = $dom.create('audio', {controls: true, src}, document.body)
     audio.style.display = 'block'
     audio.style.width = '100%'
+
+    input.addEventListener('change', () => {
+        audio.src = URL.createObjectURL(input.files[0])
+    })
 
     let canvas = $dom.create('canvas', {width, height}, document.body)
     canvas.style.display = 'block'
@@ -40,13 +46,9 @@ async function main() {
     let dataArrays = $array.seq(numChannels, () => new Uint8Array(sampleSize))
     for (let c = 0; c < numChannels; c++) {
         gl.activeTexture(gl.TEXTURE0 + c)
-        let dataTex = gl.createTexture()
-        gl.bindTexture(gl.TEXTURE_2D, dataTex)
+        $gl.createTexture(gl)
         gl.texImage2D(
             gl.TEXTURE_2D, 0, gl.R8, texWidth, texHeight, 0, gl.RED, gl.UNSIGNED_BYTE, null)
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
     }
 
     let connected = false
