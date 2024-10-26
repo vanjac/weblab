@@ -36,11 +36,18 @@ async function main() {
 
     let audioCtx = new AudioContext()
     let splitter = audioCtx.createChannelSplitter(numChannels)
+    let source = audioCtx.createMediaElementSource(audio)
+    source.connect(splitter)
+    source.connect(audioCtx.destination)
     let analysers = $array.seq(numChannels, c => {
         let analyser = audioCtx.createAnalyser()
         analyser.fftSize = sampleSize
         splitter.connect(analyser, c)
         return analyser
+    })
+
+    audio.addEventListener('play', () => {
+        audioCtx.resume()
     })
 
     let dataArrays = $array.seq(numChannels, () => new Uint8Array(sampleSize))
@@ -50,20 +57,6 @@ async function main() {
         gl.texImage2D(
             gl.TEXTURE_2D, 0, gl.R8, texWidth, texHeight, 0, gl.RED, gl.UNSIGNED_BYTE, null)
     }
-
-    let connected = false
-
-    audio.addEventListener('play', () => {
-        audioCtx.resume()
-
-        if (!connected) {
-            // @ts-ignore
-            let stream = audio.captureStream?.() ?? audio.mozCaptureStream?.()
-            let source = audioCtx.createMediaStreamSource(stream)
-            source.connect(splitter)
-            source.connect(audioCtx.destination)
-        }
-    })
 
     while (true) {
         await $async.nextFrame()
