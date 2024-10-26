@@ -65,15 +65,14 @@ export function setCol(col, row, fg, bg) {
  * @param {number} bg
  */
 function createSpan(text, fg, bg) {
-    let span = document.createElement('span')
-    span.textContent = text
+    let span = $dom.create('span', {textContent: text})
     span.style.color = palette[fg]
     span.style.backgroundColor = palette[bg]
     return span
 }
 
 export function refresh() {
-    let pre = document.createElement('pre')
+    let pre = $dom.create('pre')
     for (let col = 0; col < rows; col++) {
         let curFg = -1
         let curBg = -1
