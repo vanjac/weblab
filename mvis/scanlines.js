@@ -58,7 +58,7 @@ async function main() {
 
         if (!connected) {
             // @ts-ignore
-            let stream = audio.mozCaptureStream()
+            let stream = audio.captureStream?.() ?? audio.mozCaptureStream?.()
             let source = audioCtx.createMediaStreamSource(stream)
             source.connect(splitter)
             source.connect(audioCtx.destination)
