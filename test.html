@@ -3,10 +3,10 @@
 <title>WEBLAB</title>
 <link href="lib/base.css" rel="stylesheet">
 <script>
-  (function() {
+  document.addEventListener('DOMContentLoaded', () => {
     let path = new URLSearchParams(window.location.search).get('load')
     if (path) {
       import(`./${path}.js`).then(m => window.mod = m)
     }
-  })()
+  })
 </script>
