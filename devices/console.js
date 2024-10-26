@@ -1,11 +1,16 @@
 import * as $ram from './ram.js'
 
+export const imports = {
+    put,
+    write,
+}
+
 let lineBuf = ''
 
 /**
  * @param {number} c
  */
-export function put(c) {
+function put(c) {
     if (c == 10) {
         console.log(lineBuf)
         lineBuf = ''
@@ -17,7 +22,7 @@ export function put(c) {
 /**
  * @param {number} ptr
  */
-export function write(ptr) {
+function write(ptr) {
     while (true) {
         let c = $ram.dataView.getUint8(ptr)
         if (c == 0) {

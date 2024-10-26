@@ -12,6 +12,13 @@ const palette = Object.freeze([
     '#FF5555', '#FF55FF', '#FFFF55', '#FFFFFF',
 ])
 
+export const imports = {
+    clear,
+    setChar,
+    setCol,
+    refresh,
+}
+
 /** @type {HTMLElement} */
 let elem
 /** @type {number[][]} */
@@ -21,8 +28,11 @@ let fgCols
 /** @type {number[][]} */
 let bgCols
 
-function init() {
-    elem = $dom.create('div', {}, document.body)
+/**
+ * @param {HTMLElement} parent
+ */
+export function init(parent) {
+    elem = $dom.create('div', {}, parent)
     elem.style.lineHeight = '1'
     clear(15, 0)
     refresh()
@@ -32,7 +42,7 @@ function init() {
  * @param {number} fg
  * @param {number} bg
  */
-export function clear(fg, bg) {
+function clear(fg, bg) {
     chars = $array.seq(rows, () => $array.repeat(cols, 32))
     fgCols = $array.seq(rows, () => $array.repeat(cols, fg))
     bgCols = $array.seq(rows, () => $array.repeat(cols, bg))
@@ -43,7 +53,7 @@ export function clear(fg, bg) {
  * @param {number} row
  * @param {number} char
  */
-export function setChar(col, row, char) {
+function setChar(col, row, char) {
     chars[col][row] = char
 }
 
@@ -53,7 +63,7 @@ export function setChar(col, row, char) {
  * @param {number} fg
  * @param {number} bg
  */
-export function setCol(col, row, fg, bg) {
+function setCol(col, row, fg, bg) {
     fgCols[col][row] = fg
     bgCols[col][row] = bg
 }
@@ -71,7 +81,7 @@ function createSpan(text, fg, bg) {
     return span
 }
 
-export function refresh() {
+function refresh() {
     let pre = $dom.create('pre')
     for (let col = 0; col < rows; col++) {
         let curFg = -1
@@ -99,5 +109,3 @@ export function refresh() {
     elem.textContent = ''
     elem.appendChild(pre)
 }
-
-init()
