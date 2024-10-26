@@ -21,7 +21,7 @@ function initialPattern() {
 async function main() {
     let canvas = $dom.create('canvas', {width, height}, document.body)
     canvas.style.imageRendering = 'pixelated'
-    let gl = $gl.init(canvas)
+    let gl = canvas.getContext('webgl2')
 
     let screenVao = $gl.createScreenRectVAO(gl)
     let shaderSrc = await $fetch.text(import.meta.resolve('./starwars.frag'))
@@ -33,6 +33,7 @@ async function main() {
     $gl.createTexture(gl, initialPattern())
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT)
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT)
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)
 
     while (true) {
         await $async.nextFrame()
