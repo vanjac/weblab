@@ -1,6 +1,7 @@
 import * as $fetch from '../lib/fetch.js'
 import * as $ram from './ram.js'
 import * as $console from './console.js'
+import * as $display from './display.js'
 import * as $text from './text.js'
 
 const progSizeLimit = 2 ** 16
@@ -8,11 +9,13 @@ const progSizeLimit = 2 ** 16
 /** @type {WebAssembly.Imports} */
 const importObj = {
     console: $console.imports,
+    display: $display.imports,
     text: $text.imports,
     ram: $ram.imports,
 }
 
 async function main() {
+    $display.init(document.body)
     $text.init(document.body)
 
     let path = new URLSearchParams(window.location.search).get('file')
