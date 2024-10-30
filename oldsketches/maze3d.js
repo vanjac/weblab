@@ -110,7 +110,7 @@ function setup() {
  */
 function mouseMove(e) {
    if (e.buttons & 1) {
-      playerRot -= $math.radians(e.movementX) / 2
+      playerRot += $math.radians(e.movementX) / 2
    }
 }
 
