@@ -40,14 +40,14 @@ async function main() {
         let [mx, my] = $canvas.mousePos(canvas, $input.mouseEvent)
         if (mx >= 0 && mx < width && my >= 0 && my < height) {
             let ix = idx(mx, my)
-            if ($input.pressed[0]) {
+            if ($input.mouseEvent.buttons & 1) {
                 let mat = 1
                 if (materials[ix] != mat) {
                     materials[ix] = mat
                     densities[ix] = 0
                 }
                 densities[ix] += c.fillRate
-            } else if ($input.pressed[1]) {
+            } else if ($input.mouseEvent.buttons & 4) {
                 densities[ix] = 0
             }
         }
