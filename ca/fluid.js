@@ -34,6 +34,14 @@ async function main() {
     let ctx = canvas.getContext('2d')
     let imageData = ctx.createImageData(width, height)
 
+    let spreadDiv = $dom.create('div', {style: 'display: flex'}, document.body)
+    let spreadRange = $dom.create(
+        'input', {type: 'range', min: '0', max: '5', step: 'any'}, spreadDiv)
+    spreadRange.style.flexGrow = '1'
+    let spreadNum = $dom.create(
+        'input', {type: 'number', min: '0', max: '9999', valueAsNumber: c.spreadRatio}, spreadDiv)
+    $dom.linkInputs([spreadNum, spreadRange], () => c.spreadRatio = spreadNum.valueAsNumber)
+
     while (true) {
         await $async.nextFrame()
 
