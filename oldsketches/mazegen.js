@@ -108,7 +108,7 @@ function mazeStep() {
  * @param {number} y2
  */
 function addWall(x1, y1, x2, y2) {
-  ctx.strokeStyle = `hsl(${(x1 / width + y1 / height) * 180} 100 50)`
+  ctx.strokeStyle = `hsl(${(x1 / width + y1 / height) * 180} 100% 50%)`
   ctx.beginPath()
   ctx.moveTo(x1, y1)
   ctx.lineTo(x2, y2)

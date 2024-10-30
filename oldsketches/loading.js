@@ -53,7 +53,7 @@ function draw(millis) {
 
   ctx.fillStyle = 'white'
   ctx.fillRect(0, 0, width, height)
-  let loadingColor = `hsl(${(millis / 135) % 360} 100 44)`
+  let loadingColor = `hsl(${(millis / 135) % 360} 100% 44%)`
   loadAmount = (millis - WAIT_TIME) / 10000.0
 
   ctx.strokeStyle = loadingColor
