@@ -2,6 +2,7 @@ import * as $async from '../lib/async.js'
 import * as $dom from '../lib/dom.js'
 import * as $canvas from '../lib/canvas.js'
 import * as $math from '../lib/math.js'
+import * as $input from '../lib/input.js'
 
 const width = 256
 const height = 256
@@ -33,27 +34,11 @@ async function main() {
     let ctx = canvas.getContext('2d')
     let imageData = ctx.createImageData(width, height)
 
-    /** @type {PointerEvent} */
-    let mouseEv
-    canvas.addEventListener('pointerdown', e => {
-        canvas.setPointerCapture(e.pointerId)
-        mouseEv = e
-    })
-    canvas.addEventListener('pointermove', e => {
-        if (mouseEv) {
-            mouseEv = e
-        }
-    })
-    document.body.addEventListener('pointerup', e => {
-        canvas.releasePointerCapture(e.pointerId)
-        mouseEv = null
-    })
-
     while (true) {
         await $async.nextFrame()
 
-        if (mouseEv) {
-            let [mx, my] = $canvas.mousePos(canvas, mouseEv)
+        if ($input.pressed[0]) {
+            let [mx, my] = $canvas.mousePos(canvas, $input.mouseEvent)
             if (mx >= 0 && mx < width && my >= 0 && my < height) {
                 let ix = idx(mx, my)
                 let mat = 1
