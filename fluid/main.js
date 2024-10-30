@@ -37,16 +37,18 @@ async function main() {
     while (true) {
         await $async.nextFrame()
 
-        if ($input.pressed[0]) {
-            let [mx, my] = $canvas.mousePos(canvas, $input.mouseEvent)
-            if (mx >= 0 && mx < width && my >= 0 && my < height) {
-                let ix = idx(mx, my)
+        let [mx, my] = $canvas.mousePos(canvas, $input.mouseEvent)
+        if (mx >= 0 && mx < width && my >= 0 && my < height) {
+            let ix = idx(mx, my)
+            if ($input.pressed[0]) {
                 let mat = 1
                 if (materials[ix] != mat) {
                     materials[ix] = mat
                     densities[ix] = 0
                 }
                 densities[ix] += c.fillRate
+            } else if ($input.pressed[1]) {
+                densities[ix] = 0
             }
         }
 
