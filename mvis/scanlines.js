@@ -27,7 +27,6 @@ async function main() {
     })
 
     let canvas = $dom.create('canvas', {width, height}, document.body)
-    canvas.style.display = 'block'
     let gl = canvas.getContext('webgl2')
 
     let screenVao = $gl.createScreenRectVAO(gl)
