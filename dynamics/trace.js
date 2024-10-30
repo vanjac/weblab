@@ -9,7 +9,7 @@ const height = 512
 
 export const c = {
     bgCol: 'black',
-    traceColLight: 70,
+    traceColLight: 60,
     traceHueRate: .01,
     traceWidth: 4,
     tail: 1,
