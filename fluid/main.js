@@ -1,6 +1,7 @@
 import * as $async from '../lib/async.js'
 import * as $dom from '../lib/dom.js'
 import * as $canvas from '../lib/canvas.js'
+import * as $math from '../lib/math.js'
 
 const width = 256
 const height = 256
@@ -64,11 +65,9 @@ async function main() {
             }
         }
 
-        let xOff = (Math.random() * 2) | 0
-        let yOff = (Math.random() * 2) | 0
-        for (let y = yOff; y < height; y += 2) {
-            for (let x = xOff; x < width; x += 2) {
-                switch ((Math.random() * 4) | 0) {
+        for (let y = $math.randInt(0, 1); y < height; y += 2) {
+            for (let x = $math.randInt(0, 1); x < width; x += 2) {
+                switch ($math.randInt(0, 3)) {
                     case 0:
                         evalNeighbors(idx(x, y), idx(x + 1, y), idx(x, y + 1), idx(x + 1, y + 1))
                         break
