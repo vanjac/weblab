@@ -37,8 +37,8 @@ let paletteB = Uint8Array.from([
 export function init(parent) {
     let canvas = $dom.create('canvas', {width: scrWidth, height: scrHeight}, parent)
     canvas.style.imageRendering = 'pixelated'
-    canvas.style.width = (scrWidth * 2) + 'px'
-    canvas.style.height = (scrHeight * 2) + 'px'
+    canvas.style.width = `${scrWidth * 2}px`
+    canvas.style.height = `${scrHeight * 2}px`
     ctx = canvas.getContext('2d')
     imageData = ctx.createImageData(scrWidth, scrHeight)
 

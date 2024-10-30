@@ -29,8 +29,8 @@ function idx(x, y) {
 async function main() {
     let canvas = $dom.create('canvas', {width, height}, document.body)
     canvas.style.imageRendering = 'pixelated'
-    canvas.style.width = (width * 2) + 'px'
-    canvas.style.height = (height * 2) + 'px'
+    canvas.style.width = `${width * 2}px`
+    canvas.style.height = `${height * 2}px`
     let ctx = canvas.getContext('2d')
     let imageData = ctx.createImageData(width, height)
 
