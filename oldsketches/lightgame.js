@@ -69,6 +69,7 @@ class LightSquare {
 function setup() {
   let canvas = $dom.create('canvas', {width, height}, document.body)
   ctx = canvas.getContext('2d')
+  ctx.translate(.5, .5)
   ctx.fillStyle = cBackground
   ctx.fillRect(0, 0, width, height)
   grid = $array.seq(numSquares, x => $array.seq(numSquares, y => new LightSquare(x, y)))
