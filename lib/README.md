@@ -1,0 +1,1 @@
+The goal of this library is to create a simple personal environment for creative coding, similar to [Processing](https://processing.org/) / [p5](https://p5js.org/). The library will grow along with the sketchbook.
