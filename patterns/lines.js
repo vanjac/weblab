@@ -1,3 +1,5 @@
+// Date: 2023-10-05
+
 import * as $dom from '../lib/dom.js'
 import * as $async from '../lib/async.js'
 

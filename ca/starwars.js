@@ -1,3 +1,5 @@
+// Date: 2024-10-19
+
 import * as $dom from '../lib/dom.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'

@@ -1,3 +1,5 @@
+// Date: 2024-10-28
+
 import * as $async from '../lib/async.js'
 import * as $dom from '../lib/dom.js'
 import * as $canvas from '../lib/canvas.js'
