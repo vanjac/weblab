@@ -60,7 +60,7 @@ async function main() {
     }
 
     while (true) {
-        await $async.nextFrame()
+        await $async.frame()
         $gl.checkError(gl)
 
         for (let c = 0; c < numChannels; c++) {

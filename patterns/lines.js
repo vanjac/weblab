@@ -12,7 +12,7 @@ async function main() {
     ctx.filter = 'blur(1px) brightness(200%)'
 
     while (true) {
-        let time = await $async.nextFrame()
+        let time = await $async.frame()
 
         ctx.fillStyle = '#011'
         ctx.fillRect(0, 0, canvas.width, canvas.height)

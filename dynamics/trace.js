@@ -50,7 +50,7 @@ async function main() {
     ctx.fillRect(0, 0, width, height)
 
     while (true) {
-        let time = await $async.nextFrame()
+        let time = await $async.frame()
         let mouseDown = $input.mouse.buttons & 1
 
         let filter = `brightness(${c.feedbackBright}%) saturate(${c.feedbackSat}%)`

@@ -45,7 +45,7 @@ async function main() {
     $dom.linkInputs([spreadNum, spreadRange], () => c.spreadRatio = spreadNum.valueAsNumber)
 
     while (true) {
-        await $async.nextFrame()
+        await $async.frame()
 
         let [mx, my] = $canvas.mousePos(canvas, $input.mouse)
         if (mx >= 0 && mx < width && my >= 0 && my < height) {

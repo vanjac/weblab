@@ -26,7 +26,7 @@ async function main() {
     let bgCtx = bgCanvas.getContext('2d')
 
     while (true) {
-        let time = await $async.nextFrame()
+        let time = await $async.frame()
 
         ctx.filter = `hue-rotate(${c.hueRot}deg)`
         ctx.globalAlpha = c.bgAlpha

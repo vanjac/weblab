@@ -38,7 +38,7 @@ async function main() {
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)
 
     while (true) {
-        await $async.nextFrame()
+        await $async.frame()
         $gl.checkError(gl)
         gl.useProgram(prog.program)
         gl.bindVertexArray(screenVao)
