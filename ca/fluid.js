@@ -2,6 +2,7 @@
 
 import * as $async from '../lib/async.js'
 import * as $dom from '../lib/dom.js'
+import * as $ui from '../lib/ui.js'
 import * as $canvas from '../lib/canvas.js'
 import * as $math from '../lib/math.js'
 import * as $input from '../lib/input.js'
@@ -36,13 +37,8 @@ async function main() {
     let ctx = canvas.getContext('2d')
     let imageData = ctx.createImageData(width, height)
 
-    let spreadDiv = $dom.create('div', {style: 'display: flex'}, document.body)
-    let spreadRange = $dom.create(
-        'input', {type: 'range', min: '0', max: '5', step: 'any'}, spreadDiv)
-    spreadRange.style.flexGrow = '1'
-    let spreadNum = $dom.create(
-        'input', {type: 'number', min: '0', max: '9999', valueAsNumber: c.spreadRatio}, spreadDiv)
-    $dom.linkInputs([spreadNum, spreadRange], () => c.spreadRatio = spreadNum.valueAsNumber)
+    document.body.append($ui.rangeSpinner(
+        c.spreadRatio, {rangeMin: 0.01, rangeMax: 999, log: true}, v => c.spreadRatio = v))
 
     while (true) {
         await $async.frame()
