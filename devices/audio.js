@@ -1,11 +1,11 @@
 import * as $math from '../lib/math.js'
+import * as $music from '../lib/music.js'
 
 const toneChannels = 4
 const noiseChannel = toneChannels
 const numChannels = toneChannels + 1
 
-const c5Freq = 523.25
-const c5Cents = 5 * 12 * 100
+const c4Cents = 4 * 12 * 100
 /** @type {readonly OscillatorType[]} */
 const waveTypes = Object.freeze(['sine', 'square', 'sawtooth', 'triangle'])
 const noiseLen = 16384
@@ -46,7 +46,7 @@ export function init(context) {
 
     for (let c = 0; c < toneChannels; c++) {
         oscillators[c] = context.createOscillator()
-        oscillators[c].frequency.value = c5Freq
+        oscillators[c].frequency.value = $music.c4Freq
         oscillators[c].connect(gains[c])
         oscillators[c].start()
         sources[c] = oscillators[c]
@@ -91,7 +91,7 @@ function setWave(channel, wave) {
  */
 function setPitch(channel, cents) {
     cents = $math.clamp(cents | 0, 0, 16383)
-    sources[channel].detune.value = cents - c5Cents
+    sources[channel].detune.value = cents - c4Cents
 }
 
 /**

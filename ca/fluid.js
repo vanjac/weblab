@@ -38,8 +38,8 @@ async function main() {
     let imageData = ctx.createImageData(width, height)
 
     document.body.append($ui.rangeSpinner({
-        value: c.spreadRatio, rangeMin: 0.01, rangeMax: 999,
-        logScale: true, callback: v => c.spreadRatio = v
+        value: c.spreadRatio, callback: v => c.spreadRatio = v,
+        rangeMin: 0.01, rangeMax: 999, logScale: true,
     }))
 
     while (true) {
