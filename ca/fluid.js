@@ -37,8 +37,10 @@ async function main() {
     let ctx = canvas.getContext('2d')
     let imageData = ctx.createImageData(width, height)
 
-    document.body.append($ui.rangeSpinner(
-        c.spreadRatio, {rangeMin: 0.01, rangeMax: 999, log: true}, v => c.spreadRatio = v))
+    document.body.append($ui.rangeSpinner({
+        value: c.spreadRatio, rangeMin: 0.01, rangeMax: 999,
+        logScale: true, callback: v => c.spreadRatio = v
+    }))
 
     while (true) {
         await $async.frame()
