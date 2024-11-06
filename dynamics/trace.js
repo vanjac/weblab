@@ -44,6 +44,7 @@ let traces = [
 
 async function main() {
     let canvas = $dom.create('canvas', {width, height}, document.body)
+    canvas.style.touchAction = 'pinch-zoom'
     let ctx = canvas.getContext('2d')
 
     ctx.fillStyle = c.bgCol

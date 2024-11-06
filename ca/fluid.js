@@ -31,6 +31,7 @@ function idx(x, y) {
 
 async function main() {
     let canvas = $dom.create('canvas', {width, height}, document.body)
+    canvas.style.touchAction = 'pinch-zoom'
     canvas.style.imageRendering = 'pixelated'
     canvas.style.width = `${width * 2}px`
     canvas.style.height = `${height * 2}px`
