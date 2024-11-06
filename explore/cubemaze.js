@@ -35,6 +35,8 @@ export const c = {
  * @returns {[Float32Array, Float32Array, Float32Array]}
  */
 function generateMaze() {
+    let startTime = performance.now()
+
     let spaces = $array.seq(mazeDim, () => $array.seq(mazeDim, () => $array.repeat(mazeDim, false)))
     for (let i = 0; i < mazeDim; i++) {
         for (let j = 0; j < mazeDim; j++) {
@@ -48,6 +50,7 @@ function generateMaze() {
     }
 
     let trails = [[1, 1, 1]]
+    spaces[1][1][1] = true
 
     /** @type {number[]} */
     let lines = []
@@ -106,6 +109,7 @@ function generateMaze() {
             trails.splice(idx, 1)
         }
     }
+    console.log(`Generating maze took ${performance.now() - startTime} ms`)
     return [new Float32Array(lines), new Float32Array(tris), new Float32Array(colors)]
 }
 
