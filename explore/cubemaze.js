@@ -148,11 +148,10 @@ async function main() {
     let camPitch = 0
     let camYaw = 0
 
-    canvas.addEventListener('pointerdown', e => canvas.setPointerCapture(e.pointerId))
-    canvas.addEventListener('pointermove', e => {
-        if (e.buttons & 1) {
-            camYaw -= e.movementX * c.lookSpeed
-            camPitch -= e.movementY * c.lookSpeed
+    $input.capturePointerMove(canvas, (dx, dy) => {
+        if ($input.mouse.buttons & 1) {
+            camYaw -= dx * c.lookSpeed
+            camPitch -= dy * c.lookSpeed
         }
     })
 

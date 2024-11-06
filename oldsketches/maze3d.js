@@ -109,11 +109,12 @@ function setup() {
 }
 
 /**
- * @param {MouseEvent} e
+ * @param {number} dx
+ * @param {number} dy
  */
-function mouseMove(e) {
-   if (e.buttons & 1) {
-      playerRot += $math.radians(e.movementX) / 2
+function mouseMove(dx, dy) {
+   if ($input.mouse.buttons & 1) {
+      playerRot += $math.radians(dx) / 2
    }
 }
 
@@ -309,6 +310,5 @@ function mazeStep() {
 }
 
 setup()
-canvas.addEventListener('pointerdown', e => canvas.setPointerCapture(e.pointerId))
-canvas.addEventListener('pointermove', mouseMove)
+$input.capturePointerMove(canvas, mouseMove)
 window.requestAnimationFrame(draw)
