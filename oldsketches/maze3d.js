@@ -84,13 +84,15 @@ class Wall {
 /** @type {Wall[]} */
 let walls
 
+/** @type {HTMLCanvasElement} */
+let canvas
 /** @type {WebGL2RenderingContext} */
 let gl
 /** @type {$gl.ProgramInfo} */
 let prog
 
 function setup() {
-   let canvas = $dom.create('canvas', {width, height}, document.body)
+   canvas = $dom.create('canvas', {width, height}, document.body)
    gl = canvas.getContext('webgl2')
    gl.enable(gl.DEPTH_TEST)
    prog = $gl.createProgram(gl, [
@@ -307,5 +309,6 @@ function mazeStep() {
 }
 
 setup()
-gl.canvas.addEventListener('mousemove', mouseMove)
+canvas.addEventListener('pointerdown', e => canvas.setPointerCapture(e.pointerId))
+canvas.addEventListener('pointermove', mouseMove)
 window.requestAnimationFrame(draw)
