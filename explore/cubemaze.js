@@ -127,6 +127,11 @@ function moveCamera(camPos, invLookMat, vec) {
 
 async function main() {
     let canvas = $dom.create('canvas', {width, height}, document.body)
+    $dom.create('button', {
+        textContent: 'Fullscreen',
+        onclick: () => canvas.requestFullscreen()
+    }, document.body)
+
     let gl = canvas.getContext('webgl2')
     gl.enable(gl.DEPTH_TEST)
     let prog = $gl.createProgram(gl, [

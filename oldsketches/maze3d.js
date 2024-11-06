@@ -93,6 +93,11 @@ let prog
 
 function setup() {
    canvas = $dom.create('canvas', {width, height}, document.body)
+   $dom.create('button', {
+       textContent: 'Fullscreen',
+       onclick: () => canvas.requestFullscreen()
+   }, document.body)
+
    gl = canvas.getContext('webgl2')
    gl.enable(gl.DEPTH_TEST)
    prog = $gl.createProgram(gl, [
