@@ -54,10 +54,12 @@ function generateMaze() {
 
     /** @type {number[]} */
     let lines = []
-    /** @type {number[]} */
-    let tris = []
-    /** @type {number[]} */
-    let colors = []
+    let tris = [
+        mazeDim - 1, mazeDim - 1, mazeDim - 2,
+        mazeDim - 1, mazeDim - 2, mazeDim - 1,
+        mazeDim - 2, mazeDim - 1, mazeDim - 1,
+    ]
+    let colors = $array.repeat(3, $colArr.rgb(255, 230, 120)).flat()
     while (trails.length) {
         let idx = $math.randInt(0, trails.length - 1)
         let pos = trails[idx]
@@ -186,6 +188,7 @@ async function main() {
 
 
         $gl.checkError(gl)
+        gl.clearColor(...$colArr.rgba(45, 0, 90, 1))
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
         // gl.vertexAttrib3f($gl.boundAttr.aColor, 1, 0, 0)
