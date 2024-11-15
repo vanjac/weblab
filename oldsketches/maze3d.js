@@ -1,15 +1,9 @@
 // Date: 2016-04-16
 // Ported to JS: 2024-10-18
 
+import {$dom, $math, $gl, $glShader, $glImm, $mat4, $colArr} from '../lib/index-3d.js'
 import * as $array from '../lib/array.js'
-import * as $dom from '../lib/dom.js'
-import * as $math from '../lib/math.js'
 import * as $input from '../lib/input.js'
-import * as $gl from '../lib/gl.js'
-import * as $glShader from '../lib/glShader.js'
-import * as $glImm from '../lib/glImm.js'
-import * as $mat4 from '../lib/mat4.js'
-import * as $colArr from '../lib/colArr.js'
 /** @typedef {[number, number, number]} Color */
 
 const width = 960

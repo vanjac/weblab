@@ -1,16 +1,8 @@
 // Date: 2024-11-05
 
+import {$math, $dom, $gl, $glShader, $glImm, $mat4, $async, $vec, $colArr} from '../lib/index-3d.js'
 import * as $array from '../lib/array.js'
-import * as $math from '../lib/math.js'
-import * as $dom from '../lib/dom.js'
-import * as $gl from '../lib/gl.js'
-import * as $glShader from '../lib/glShader.js'
-import * as $glImm from '../lib/glImm.js'
-import * as $mat4 from '../lib/mat4.js'
-import * as $async from '../lib/async.js'
 import * as $input from '../lib/input.js'
-import * as $vec from '../lib/vec.js'
-import * as $colArr from '../lib/colArr.js'
 
 const width = 1024
 const height = 768
@@ -162,6 +154,7 @@ async function main() {
 
     while (true) {
         await $async.frame()
+        $gl.checkError(gl)
 
         let lookMat = $mat4.ident
         lookMat = $mat4.rotate(lookMat, -camPitch, [1, 0, 0])
@@ -190,8 +183,6 @@ async function main() {
         let viewMat = $mat4.translate(lookMat, $vec.neg(camPos))
         gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, viewMat)
 
-
-        $gl.checkError(gl)
         gl.clearColor(...$colArr.rgba(45, 0, 90, 1))
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
