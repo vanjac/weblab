@@ -29,7 +29,7 @@ let gameStarted = false
 
 const mazeXLen = 12
 const mazeYLen = 12
-const spaces = $array.seq(mazeXLen, () => $array.repeat(mazeYLen, false))
+const spaces = $array.seq(mazeXLen, () => Array(mazeYLen).fill(false))
 let filledSpaces = 0
 const mazeWallLen = 256
 

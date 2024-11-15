@@ -28,7 +28,7 @@ function draw() {
 
 const mazeXLen = 53
 const mazeYLen = 53
-const spaces = $array.seq(mazeXLen, () => $array.repeat(mazeYLen, false))
+const spaces = $array.seq(mazeXLen, () => Array(mazeYLen).fill(false))
 let filledSpaces = 0
 const mazeWallLen = 12
 

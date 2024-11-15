@@ -43,9 +43,9 @@ export function init(parent) {
  * @param {number} bg
  */
 function clear(fg, bg) {
-    chars = $array.seq(rows, () => $array.repeat(cols, 32))
-    fgCols = $array.seq(rows, () => $array.repeat(cols, fg))
-    bgCols = $array.seq(rows, () => $array.repeat(cols, bg))
+    chars = $array.seq(rows, () => Array(cols).fill(32))
+    fgCols = $array.seq(rows, () => Array(cols).fill(fg))
+    bgCols = $array.seq(rows, () => Array(cols).fill(bg))
 }
 
 /**

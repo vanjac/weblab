@@ -29,7 +29,7 @@ export const c = {
 function generateMaze() {
     let startTime = performance.now()
 
-    let spaces = $array.seq(mazeDim, () => $array.seq(mazeDim, () => $array.repeat(mazeDim, false)))
+    let spaces = $array.seq(mazeDim, () => $array.seq(mazeDim, () => Array(mazeDim).fill(false)))
     for (let i = 0; i < mazeDim; i++) {
         for (let j = 0; j < mazeDim; j++) {
             spaces[i][j][0] = true
@@ -51,7 +51,7 @@ function generateMaze() {
         mazeDim - 1, mazeDim - 2, mazeDim - 1,
         mazeDim - 2, mazeDim - 1, mazeDim - 1,
     ]
-    let colors = $array.repeat(3, $colArr.rgb(255, 230, 120)).flat()
+    let colors = Array(3).fill($colArr.rgb(255, 230, 120)).flat()
     while (trails.length) {
         let idx = $math.randInt(0, trails.length - 1)
         let pos = trails[idx]
@@ -84,7 +84,7 @@ function generateMaze() {
                         ...$vec.add($vec.add(adj, uAxis), vAxis),
                         ...$vec.add(adj, vAxis),
                     ])
-                    colors = colors.concat($array.repeat(6, color).flat())
+                    colors = colors.concat(Array(6).fill(color).flat())
                 }
                 adj = $vec.add(movePos, $vec.axis(3, axis, -1))
                 if (!$vec.eq(adj, pos) && spaces[adj[0]][adj[1]][adj[2]]) {
@@ -96,7 +96,7 @@ function generateMaze() {
                         ...$vec.add($vec.add(movePos, uAxis), vAxis),
                         ...$vec.add(movePos, vAxis),
                     ])
-                    colors = colors.concat($array.repeat(6, color).flat())
+                    colors = colors.concat(Array(6).fill(color).flat())
                 }
             }
         } else {
