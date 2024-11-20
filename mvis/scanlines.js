@@ -55,9 +55,7 @@ async function main() {
 	for (let c = 0; c < numChannels; c++) {
 		gl.activeTexture(gl.TEXTURE0 + c)
 		$gl.createTexture(gl)
-		gl.texImage2D(
-			gl.TEXTURE_2D, 0, gl.R8, texWidth, texHeight, 0, gl.RED, gl.UNSIGNED_BYTE, null
-		)
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.R8, texWidth, texHeight, 0, gl.RED, gl.UNSIGNED_BYTE, null)
 	}
 
 	while (true) {
@@ -69,9 +67,7 @@ async function main() {
 		}
 		for (let c = 0; c < numChannels; c++) {
 			gl.activeTexture(gl.TEXTURE0 + c)
-			gl.texSubImage2D(
-				gl.TEXTURE_2D, 0, 0, 0, texWidth, texHeight, gl.RED, gl.UNSIGNED_BYTE, dataArrays[c]
-			)
+			gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, texWidth, texHeight, gl.RED, gl.UNSIGNED_BYTE, dataArrays[c])
 		}
 
 		gl.useProgram(prog.program)
