@@ -88,8 +88,8 @@ let prog
 function setup() {
    canvas = $dom.create('canvas', {width, height}, document.body)
    $dom.create('button', {
-       textContent: 'Fullscreen',
-       onclick: () => canvas.requestFullscreen()
+      textContent: 'Fullscreen',
+      onclick: () => canvas.requestFullscreen()
    }, document.body)
 
    gl = canvas.getContext('webgl2')
@@ -181,8 +181,7 @@ function cameraPoint(x, y, rotation) {
    let cameraZ = cameraY / Math.tan(fov / 2.0)
    let aspect = width / height
 
-   gl.uniformMatrix4fv(prog.uniforms.uProjMat, false,
-      $mat4.perspective(fov, aspect, cameraZ/50.0))
+   gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, $mat4.perspective(fov, aspect, cameraZ/50.0))
    let view = $mat4.ident.slice()
    $mat4.rotate(view, -rotation + Math.PI/2, [0,0,1], view)
    $mat4.translate(view, [-x,-y,0], view)

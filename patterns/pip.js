@@ -43,8 +43,7 @@ async function main() {
                     let trX = width * (.25 + x / 2) + (xOff % (width / 2))
                     let trY = height * (.25 + y / 2) + (yOff % (height / 2))
                     ctx.translate(trX, trY)
-                    let checker = x + y
-                        + Math.floor(xOff / width * 2) + Math.floor(yOff / width * 2)
+                    let checker = x + y + Math.floor(xOff / width * 2) + Math.floor(yOff / width * 2)
                     ctx.rotate(time * c.sqSpin + $math.mod(checker, 2) * Math.PI / 4)
                     ctx.scale(c.sqScale, c.sqScale)
                     ctx.translate(-width/2, -height/2)
