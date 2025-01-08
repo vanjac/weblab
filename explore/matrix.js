@@ -1,7 +1,7 @@
 // Date: 2024-11-14
 
 import * as $async from '../lib/async.js'
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
 import * as $mat4 from '../lib/mat4.js'
@@ -19,38 +19,46 @@ const viewDist = 3
 let world = true
 
 async function main() {
-	let canvas = $dom.create('canvas', {width, height}, document.body)
+	let canvas = $html.canvas({width, height})
 
-	let modelMatDiv = $dom.create('div', {style: 'display: inline-block;'}, document.body)
+	let modelMatDiv = $html.div({style: 'display: inline-block;'})
 	for (let row = 0; row < 4; row++) {
-		let div = $dom.create('div', {}, modelMatDiv)
+		let div = modelMatDiv.appendChild($html.div())
 		for (let col = 0; col < 4; col++) {
 			let idx = row + col * 4
-			let input = $dom.create('input', {type: 'number', min: '-99', max: '99', step: '.1'}, div)
+			let input = $html.input({type: 'number', min: '-99', max: '99', step: '.1'})
 			input.valueAsNumber = modelMat[idx]
 			if (col == 2) {
 				input.disabled = true
 			} else {
 				input.oninput = () => modelMat[idx] = input.valueAsNumber
 			}
+			div.appendChild(input)
 		}
 	}
 
-	$dom.create('span', {style: 'display: inline-block; width: 20pt'}, document.body)
-
-	let texMatDiv = $dom.create('div', {style: 'display: inline-block'}, document.body)
+	let texMatDiv = $html.div({style: 'display: inline-block'})
 	for (let row = 0; row < 3; row++) {
-		let div = $dom.create('div', {}, texMatDiv)
+		let div = texMatDiv.appendChild($html.div())
 		for (let col = 0; col < 3; col++) {
 			let idx = row + col * 3
-			let input = $dom.create('input', {type: 'number', min: '-99', max: '99', step: '.1'}, div)
+			let input = $html.input({type: 'number', min: '-99', max: '99', step: '.1'})
 			input.valueAsNumber = texMat[idx]
 			input.oninput = () => texMat[idx] = input.valueAsNumber
+			div.appendChild(input)
 		}
 	}
 
-	let worldCheck = $dom.create('input', {type: 'checkbox', checked: world}, document.body)
+	let worldCheck = $html.input({type: 'checkbox', checked: world})
 	worldCheck.oninput = () => world = worldCheck.checked
+
+	document.body.append(
+		canvas,
+		modelMatDiv,
+		$html.span({style: 'display: inline-block; width: 20pt'}),
+		texMatDiv,
+		worldCheck,
+	)
 
 	let gl = canvas.getContext('webgl2')
 	gl.enable(gl.DEPTH_TEST)

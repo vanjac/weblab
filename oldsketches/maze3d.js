@@ -1,7 +1,7 @@
 // Date: 2016-04-16
 // Ported to JS: 2024-10-18
 
-import {$dom, $math, $gl, $glShader, $glImm, $mat4, $colArr} from '../lib/index-3d.js'
+import {$html, $math, $gl, $glShader, $glImm, $mat4, $colArr} from '../lib/index-3d.js'
 import * as $array from '../lib/array.js'
 import * as $input from '../lib/input.js'
 /** @typedef {[number, number, number]} Color */
@@ -86,11 +86,11 @@ let gl
 let prog
 
 function setup() {
-	canvas = $dom.create('canvas', {width, height}, document.body)
-	$dom.create('button', {
-		textContent: 'Fullscreen',
-		onclick: () => canvas.requestFullscreen()
-	}, document.body)
+	canvas = $html.canvas({width, height})
+	document.body.append(
+		canvas,
+		$html.button({onclick: () => canvas.requestFullscreen()}, ['Fullscreen'])
+	)
 
 	gl = canvas.getContext('webgl2')
 	gl.enable(gl.DEPTH_TEST)

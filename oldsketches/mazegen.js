@@ -1,7 +1,7 @@
 // Date: 2016-03-05
 // Ported to JS: 2024-10-16
 
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 import * as $array from '../lib/array.js'
 
 const width = 640
@@ -11,7 +11,7 @@ const height = 640
 let ctx
 
 function setup() {
-	let canvas = $dom.create('canvas', {width, height}, document.body)
+	let canvas = document.body.appendChild($html.canvas({width, height}))
 	ctx = canvas.getContext('2d')
 	ctx.fillStyle = 'black'
 	ctx.fillRect(0, 0, width, height)

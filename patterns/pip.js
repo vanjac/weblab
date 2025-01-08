@@ -1,6 +1,6 @@
 // Date: 2024-10-20
 
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 import * as $async from '../lib/async.js'
 import * as $math from '../lib/math.js'
 
@@ -17,10 +17,10 @@ const sqAlpha = .5
 const hueRot = -15
 
 async function main() {
-	let canvas = $dom.create('canvas', {width, height}, document.body)
+	let canvas = document.body.appendChild($html.canvas({width, height}))
 	let ctx = canvas.getContext('2d')
 
-	let bgCanvas = $dom.create('canvas', {width, height})
+	let bgCanvas = $html.canvas({width, height})
 	let bgCtx = bgCanvas.getContext('2d')
 
 	while (true) {

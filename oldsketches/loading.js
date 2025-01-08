@@ -1,7 +1,7 @@
 // Date: 2015-05-21
 // Ported to JS: 2024-10-16
 
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 
 const width = 192
 const height = 192
@@ -21,7 +21,7 @@ let stopMillis = -1
 let ctx
 
 function setup() {
-	let canvas = $dom.create('canvas', {width, height}, document.body)
+	let canvas = document.body.appendChild($html.canvas({width, height}))
 	ctx = canvas.getContext('2d')
 	ctx.font = '12px sans-serif'
 }

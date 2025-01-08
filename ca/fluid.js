@@ -1,7 +1,7 @@
 // Date: 2024-10-28
 
 import * as $async from '../lib/async.js'
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 import * as $ui from '../lib/ui.js'
 import * as $canvas from '../lib/canvas.js'
 import * as $math from '../lib/math.js'
@@ -28,7 +28,7 @@ function idx(x, y) {
 }
 
 async function main() {
-	let canvas = $dom.create('canvas', {width, height}, document.body)
+	let canvas = $html.canvas({width, height})
 	canvas.style.touchAction = 'pinch-zoom'
 	canvas.style.imageRendering = 'pixelated'
 	canvas.style.width = `${width * 2}px`
@@ -36,7 +36,7 @@ async function main() {
 	let ctx = canvas.getContext('2d')
 	let imageData = ctx.createImageData(width, height)
 
-	document.body.append($ui.rangeSpinner({
+	document.body.append(canvas, $ui.rangeSpinner({
 		value: spreadRatio, callback: v => spreadRatio = v,
 		rangeMin: 0.01, rangeMax: 999, logScale: true,
 	}))

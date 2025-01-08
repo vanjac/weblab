@@ -1,6 +1,6 @@
 // Date: 2024-11-05
 
-import {$math, $dom, $gl, $glShader, $glImm, $mat4, $async, $vec, $colArr} from '../lib/index-3d.js'
+import {$math, $html, $gl, $glShader, $glImm, $mat4, $async, $vec, $colArr} from '../lib/index-3d.js'
 import * as $array from '../lib/array.js'
 import * as $input from '../lib/input.js'
 
@@ -116,11 +116,11 @@ function moveCamera(camPos, invLookMat, vec) {
 }
 
 async function main() {
-	let canvas = $dom.create('canvas', {width, height}, document.body)
-	$dom.create('button', {
-		textContent: 'Fullscreen',
-		onclick: () => canvas.requestFullscreen()
-	}, document.body)
+	let canvas = $html.canvas({width, height})
+	document.body.append(
+		canvas,
+		$html.button({onclick: () => canvas.requestFullscreen()}, ['Fullscreen']),
+	)
 
 	let gl = canvas.getContext('webgl2')
 	gl.enable(gl.DEPTH_TEST)

@@ -1,6 +1,6 @@
 // Date: 2024-10-19
 
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
 import * as $async from '../lib/async.js'
@@ -10,7 +10,7 @@ const width = 768
 const height = 768
 
 function initialPattern() {
-	let canvas = $dom.create('canvas', {width, height})
+	let canvas = $html.canvas({width, height})
 	let ctx = canvas.getContext('2d')
 	ctx.fillStyle = 'black'
 	ctx.fillRect(0, 0, width, height)
@@ -21,7 +21,7 @@ function initialPattern() {
 }
 
 async function main() {
-	let canvas = $dom.create('canvas', {width, height}, document.body)
+	let canvas = document.body.appendChild($html.canvas({width, height}))
 	canvas.style.imageRendering = 'pixelated'
 	let gl = canvas.getContext('webgl2')
 

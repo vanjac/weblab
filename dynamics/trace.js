@@ -1,6 +1,6 @@
 // Date: 2024-10-30
 
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 import * as $async from '../lib/async.js'
 import * as $input from '../lib/input.js'
 import * as $canvas from '../lib/canvas.js'
@@ -41,7 +41,7 @@ let traces = [
 ]
 
 async function main() {
-	let canvas = $dom.create('canvas', {width, height}, document.body)
+	let canvas = document.body.appendChild($html.canvas({width, height}))
 	canvas.style.touchAction = 'pinch-zoom'
 	let ctx = canvas.getContext('2d')
 

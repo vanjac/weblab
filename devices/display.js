@@ -1,4 +1,4 @@
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 import * as $ram from './ram.js'
 
 const scrWidth = 256
@@ -36,7 +36,7 @@ let paletteB = Uint8Array.from([
  * @param {HTMLElement} parent
  */
 export function init(parent) {
-	let canvas = $dom.create('canvas', {width: scrWidth, height: scrHeight}, parent)
+	let canvas = parent.appendChild($html.canvas({width: scrWidth, height: scrHeight}))
 	canvas.style.imageRendering = 'pixelated'
 	canvas.style.width = `${scrWidth * 2}px`
 	canvas.style.height = `${scrHeight * 2}px`

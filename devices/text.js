@@ -1,5 +1,5 @@
 import * as $array from '../lib/array.js'
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 
 const cols = 80
 const rows = 25
@@ -32,7 +32,7 @@ let bgCols
  * @param {HTMLElement} parent
  */
 export function init(parent) {
-	elem = $dom.create('div', {}, parent)
+	elem = parent.appendChild($html.div())
 	elem.style.lineHeight = '1'
 	clear(15, 0)
 	refresh()
@@ -75,14 +75,14 @@ function setCol(col, row, fg, bg) {
  * @param {number} bg
  */
 function createSpan(text, fg, bg) {
-	let span = $dom.create('span', {textContent: text})
+	let span = $html.span({}, [text])
 	span.style.color = palette[fg]
 	span.style.backgroundColor = palette[bg]
 	return span
 }
 
 function refresh() {
-	let pre = $dom.create('pre')
+	let pre = $html.pre()
 	for (let col = 0; col < rows; col++) {
 		let curFg = -1
 		let curBg = -1

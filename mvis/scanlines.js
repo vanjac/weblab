@@ -1,6 +1,6 @@
 // Date: 2024-10-25
 
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
 import * as $fetch from '../lib/fetch.js'
@@ -17,10 +17,10 @@ const sampleSize = texWidth * texHeight
 const numChannels = 2
 
 async function main() {
-	let input = $dom.create('input', {type: 'file', accept: 'audio/*'}, document.body)
+	let input = $html.input({type: 'file', accept: 'audio/*'})
 
 	let src = new URLSearchParams(window.location.search).get('file')
-	let audio = $dom.create('audio', {controls: true, src}, document.body)
+	let audio = $html.audio({controls: true, src})
 	audio.style.display = 'block'
 	audio.style.width = '100%'
 
@@ -28,8 +28,10 @@ async function main() {
 		audio.src = URL.createObjectURL(input.files[0])
 	})
 
-	let canvas = $dom.create('canvas', {width, height}, document.body)
+	let canvas = $html.canvas({width, height})
 	let gl = canvas.getContext('webgl2')
+
+	document.body.append(input, audio, canvas)
 
 	let screenVao = $gl.createScreenRectVAO(gl)
 	let shaderSrc = await $fetch.text(import.meta.resolve('./scanlines.frag'))

@@ -1,13 +1,13 @@
 // Date: 2023-10-05
 
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 import * as $async from '../lib/async.js'
 
 const width = 400
 const height = 400
 
 async function main() {
-	let canvas = $dom.create('canvas', {width, height}, document.body)
+	let canvas = document.body.appendChild($html.canvas({width, height}))
 	let ctx = canvas.getContext('2d')
 	ctx.filter = 'blur(1px) brightness(200%)'
 

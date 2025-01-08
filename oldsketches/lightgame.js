@@ -1,7 +1,7 @@
 // Date: 2013-12-07
 // Ported to JS: 2024-10-16
 
-import * as $dom from '../lib/dom.js'
+import * as $html from '../lib/html.js'
 import * as $canvas from '../lib/canvas.js'
 import * as $array from '../lib/array.js'
 
@@ -67,7 +67,7 @@ class LightSquare {
 }
 
 function setup() {
-	let canvas = $dom.create('canvas', {width, height}, document.body)
+	let canvas = document.body.appendChild($html.canvas({width, height}))
 	ctx = canvas.getContext('2d')
 	ctx.translate(.5, .5)
 	ctx.fillStyle = cBackground
