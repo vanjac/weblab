@@ -5,3 +5,9 @@ interface Array<T> {
 	// https://github.com/microsoft/TypeScript/issues/31785#issuecomment-948012321
 	fill<U>(value: U): Array<U>;
 }
+
+interface ImportMeta {
+	// Replete compatibility
+	// https://docs.deno.com/runtime/reference/deno_namespace_apis/#import.meta.main
+	main: boolean
+}
