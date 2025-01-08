@@ -10,10 +10,8 @@ import * as $input from '../lib/input.js'
 const width = 256
 const height = 256
 
-export const c = {
-	spreadRatio: .7,
-	fillRate: 10,
-}
+const fillRate = 10
+let spreadRatio = .7
 
 let materials = new Float32Array(width * (height + 1))
 let densities = new Float32Array(width * (height + 1))
@@ -39,7 +37,7 @@ async function main() {
 	let imageData = ctx.createImageData(width, height)
 
 	document.body.append($ui.rangeSpinner({
-		value: c.spreadRatio, callback: v => c.spreadRatio = v,
+		value: spreadRatio, callback: v => spreadRatio = v,
 		rangeMin: 0.01, rangeMax: 999, logScale: true,
 	}))
 
@@ -55,7 +53,7 @@ async function main() {
 					materials[ix] = mat
 					densities[ix] = 0
 				}
-				densities[ix] += c.fillRate
+				densities[ix] += fillRate
 			} else if ($input.mouse.buttons & 4) {
 				densities[ix] = 0
 			}
@@ -151,7 +149,7 @@ function evalFour(idxA1, idxA2, idxA3, idxA4) {
 function evalThreeAndOne(idxA1, idxA2, idxA3, idxB1, matB) {
 	let sumA = densities[idxA1] + densities[idxA2] + densities[idxA3]
 	let sumB = densities[idxB1]
-	if (sumB / c.spreadRatio > sumA) {
+	if (sumB / spreadRatio > sumA) {
 		materials[idxA2] = matB
 		materials[idxA3] = matB
 		sumB /= 3
@@ -159,7 +157,7 @@ function evalThreeAndOne(idxA1, idxA2, idxA3, idxB1, matB) {
 		densities[idxA2] = sumB
 		densities[idxA3] = sumB
 		densities[idxB1] = sumB
-	} else if (sumB * c.spreadRatio > sumA) {
+	} else if (sumB * spreadRatio > sumA) {
 		materials[idxA3] = matB
 		sumA /= 2
 		sumB /= 2
@@ -186,14 +184,14 @@ function evalThreeAndOne(idxA1, idxA2, idxA3, idxB1, matB) {
 function evalTwoAndTwo(idxA1, idxA2, idxB1, idxB2, matA, matB) {
 	let sumA = densities[idxA1] + densities[idxA2]
 	let sumB = densities[idxB1] + densities[idxB2]
-	if (sumB / c.spreadRatio > sumA) {
+	if (sumB / spreadRatio > sumA) {
 		materials[idxA2] = matB
 		sumB /= 3
 		densities[idxA1] = sumA
 		densities[idxA2] = sumB
 		densities[idxB1] = sumB
 		densities[idxB2] = sumB
-	} else if (sumB * c.spreadRatio > sumA) {
+	} else if (sumB * spreadRatio > sumA) {
 		sumA /= 2
 		sumB /= 2
 		densities[idxA1] = sumA

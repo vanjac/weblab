@@ -18,10 +18,8 @@ const wallColors = [
 	$colArr.rgb(207, 20, 182),
 ]
 
-export const c = {
-	lookSpeed: 0.01,
-	moveSpeed: 0.03,
-}
+const lookSpeed = 0.01
+const moveSpeed = 0.03
 
 /**
  * @returns {[Float32Array, Float32Array, Float32Array]}
@@ -113,7 +111,7 @@ function generateMaze() {
  * @param {number[]} vec
  */
 function moveCamera(camPos, invLookMat, vec) {
-	let [x, y, z] = $mat4.transform(invLookMat, $vec.mul(vec, c.moveSpeed))
+	let [x, y, z] = $mat4.transform(invLookMat, $vec.mul(vec, moveSpeed))
 	return $vec.add(camPos, [x, y, z])
 }
 
@@ -147,8 +145,8 @@ async function main() {
 
 	$input.capturePointerMove(canvas, (dx, dy) => {
 		if ($input.mouse.buttons & 1) {
-			camYaw -= dx * c.lookSpeed
-			camPitch -= dy * c.lookSpeed
+			camYaw -= dx * lookSpeed
+			camPitch -= dy * lookSpeed
 		}
 	})
 

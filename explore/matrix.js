@@ -12,13 +12,11 @@ import * as $fetch from '../lib/fetch.js'
 const width = 1024
 const height = 768
 
-export const c = {
-	modelMat: $mat4.translate($mat4.ident, [0, 0, -1]),
-	texMat: Float32Array.of(1, 0, 0, 0, 1, 0, 0, 0, 1),
-	world: true,
-	rotateSpeed: 1.5,
-	viewDist: 3,
-}
+const modelMat = $mat4.translate($mat4.ident, [0, 0, -1])
+const texMat = Float32Array.of(1, 0, 0, 0, 1, 0, 0, 0, 1)
+const rotateSpeed = 1.5
+const viewDist = 3
+let world = true
 
 async function main() {
 	let canvas = $dom.create('canvas', {width, height}, document.body)
@@ -29,11 +27,11 @@ async function main() {
 		for (let col = 0; col < 4; col++) {
 			let idx = row + col * 4
 			let input = $dom.create('input', {type: 'number', min: '-99', max: '99', step: '.1'}, div)
-			input.valueAsNumber = c.modelMat[idx]
+			input.valueAsNumber = modelMat[idx]
 			if (col == 2) {
 				input.disabled = true
 			} else {
-				input.oninput = () => c.modelMat[idx] = input.valueAsNumber
+				input.oninput = () => modelMat[idx] = input.valueAsNumber
 			}
 		}
 	}
@@ -46,13 +44,13 @@ async function main() {
 		for (let col = 0; col < 3; col++) {
 			let idx = row + col * 3
 			let input = $dom.create('input', {type: 'number', min: '-99', max: '99', step: '.1'}, div)
-			input.valueAsNumber = c.texMat[idx]
-			input.oninput = () => c.texMat[idx] = input.valueAsNumber
+			input.valueAsNumber = texMat[idx]
+			input.oninput = () => texMat[idx] = input.valueAsNumber
 		}
 	}
 
-	let worldCheck = $dom.create('input', {type: 'checkbox', checked: c.world}, document.body)
-	worldCheck.oninput = () => c.world = worldCheck.checked
+	let worldCheck = $dom.create('input', {type: 'checkbox', checked: world}, document.body)
+	worldCheck.oninput = () => world = worldCheck.checked
 
 	let gl = canvas.getContext('webgl2')
 	gl.enable(gl.DEPTH_TEST)
@@ -85,13 +83,13 @@ async function main() {
 		let time = await $async.frame()
 		$gl.checkError(gl)
 
-		gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, c.modelMat)
-		gl.uniformMatrix3fv(prog.uniforms.uTexMat0, false, c.texMat)
-		if (c.world) {
+		gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, modelMat)
+		gl.uniformMatrix3fv(prog.uniforms.uTexMat0, false, texMat)
+		if (world) {
 			gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj)
 			let viewMat = $mat4.ident
-			viewMat = $mat4.translate(viewMat, [0, c.viewDist, 0])
-			viewMat = $mat4.rotate(viewMat, time / 1000 * c.rotateSpeed, [0, 0, 1])
+			viewMat = $mat4.translate(viewMat, [0, viewDist, 0])
+			viewMat = $mat4.rotate(viewMat, time / 1000 * rotateSpeed, [0, 0, 1])
 			gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, viewMat)
 		} else {
 			gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, $mat4.ident)

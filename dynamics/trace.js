@@ -9,22 +9,20 @@ import * as $vec from '../lib/vec.js'
 const width = 512
 const height = 512
 
-export const c = {
-	bgCol: 'black',
-	traceColLight: 60,
-	traceHueRate: .01,
-	traceWidth: 4,
-	tail: 1,
-	fadeAlpha: 0.04,
-	velRate: 0.5,
-	accelRate: 0.05,
-	repelRate: 0.8,
-	feedbackScale: 1.005,
-	feedbackBlur: 1,
-	feedbackHue: 5,
-	feedbackBright: 103,
-	feedbackSat: 101,
-}
+const bgCol = 'black'
+const traceColLight = 60
+const traceHueRate = .01
+const traceWidth = 4
+const tail = 1
+const fadeAlpha = 0.04
+const velRate = 0.5
+const accelRate = 0.05
+const repelRate = 0.8
+const feedbackScale = 1.005
+const feedbackBlur = 1
+const feedbackHue = 5
+const feedbackBright = 103
+const feedbackSat = 101
 
 /**
  * @typedef {{
@@ -47,25 +45,25 @@ async function main() {
 	canvas.style.touchAction = 'pinch-zoom'
 	let ctx = canvas.getContext('2d')
 
-	ctx.fillStyle = c.bgCol
+	ctx.fillStyle = bgCol
 	ctx.fillRect(0, 0, width, height)
 
 	while (true) {
 		let time = await $async.frame()
 		let mouseDown = $input.mouse.buttons & 1
 
-		let filter = `brightness(${c.feedbackBright}%) saturate(${c.feedbackSat}%)`
-		filter += ` blur(${c.feedbackBlur}px) hue-rotate(${c.feedbackHue}deg)`
+		let filter = `brightness(${feedbackBright}%) saturate(${feedbackSat}%)`
+		filter += ` blur(${feedbackBlur}px) hue-rotate(${feedbackHue}deg)`
 		ctx.filter = filter
 		ctx.translate(width / 2, height / 2)
-		ctx.scale(c.feedbackScale, c.feedbackScale)
+		ctx.scale(feedbackScale, feedbackScale)
 		ctx.translate(-width / 2, -height / 2)
 		ctx.drawImage(canvas, 0, 0)
 		ctx.filter = ''
 		ctx.resetTransform()
 
-		ctx.globalAlpha = mouseDown ? c.fadeAlpha * 2 : c.fadeAlpha
-		ctx.fillStyle = c.bgCol
+		ctx.globalAlpha = mouseDown ? fadeAlpha * 2 : fadeAlpha
+		ctx.fillStyle = bgCol
 		ctx.fillRect(0, 0, width, height)
 
 		ctx.globalAlpha = 1
@@ -75,26 +73,26 @@ async function main() {
 		for (let trace of traces) {
 			let ptraceX = trace.x, ptraceY = trace.y
 
-			let tarVelX = (mouseX - trace.x) * (mouseDown ? 1 : c.velRate)
-			let tarVelY = (mouseY - trace.y) * (mouseDown ? 1 : c.velRate)
+			let tarVelX = (mouseX - trace.x) * (mouseDown ? 1 : velRate)
+			let tarVelY = (mouseY - trace.y) * (mouseDown ? 1 : velRate)
 			for (let other of traces) {
 				if (other != trace) {
 					let [dx, dy] = $vec.normalize([trace.x - other.x, trace.y - other.y])
 					;[dx, dy] = $vec.mul([dx, dy], $vec.mag([trace.velX, trace.velY]))
-					tarVelX += dx * c.repelRate
-					tarVelY += dy * c.repelRate
+					tarVelX += dx * repelRate
+					tarVelY += dy * repelRate
 				}
 			}
-			trace.velX += (tarVelX - trace.velX) * c.accelRate
-			trace.velY += (tarVelY - trace.velY) * c.accelRate
+			trace.velX += (tarVelX - trace.velX) * accelRate
+			trace.velY += (tarVelY - trace.velY) * accelRate
 
 			trace.x += trace.velX
 			trace.y += trace.velY
 
-			ctx.strokeStyle = `hsl(${time * c.traceHueRate + traceI * 60} 100% ${c.traceColLight}%)`
-			ctx.lineWidth = c.traceWidth
+			ctx.strokeStyle = `hsl(${time * traceHueRate + traceI * 60} 100% ${traceColLight}%)`
+			ctx.lineWidth = traceWidth
 			ctx.beginPath()
-			ctx.moveTo(ptraceX + (ptraceX - trace.x) * c.tail, ptraceY + (ptraceY - trace.y) * c.tail)
+			ctx.moveTo(ptraceX + (ptraceX - trace.x) * tail, ptraceY + (ptraceY - trace.y) * tail)
 			ctx.lineTo(trace.x, trace.y)
 			ctx.stroke()
 			traceI++
