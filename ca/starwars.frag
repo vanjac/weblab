@@ -1,7 +1,7 @@
 // https://conwaylife.com/wiki/OCA:Star_Wars
 
 precision mediump float;
-varying vec2 vTexCoord0;
+varying vec3 vTexCoord0;
 
 uniform sampler2D uTexture;
 
@@ -43,5 +43,5 @@ vec4 nextState(vec2 pos) {
 }
 
 void main() {
-	gl_FragColor = nextState(vTexCoord0);
+	gl_FragColor = nextState(vTexCoord0.xy);
 }
