@@ -6,6 +6,9 @@
 		"skipLibCheck": false,
 		"noEmit": true,
 
-		"strictBindCallApply": true,
+		"strict": true,
+		"noImplicitAny": false,
+        "strictNullChecks": false,
+        "noImplicitReturns": true,
 	},
 }
