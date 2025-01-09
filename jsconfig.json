@@ -5,5 +5,7 @@
 		"checkJs": true,
 		"skipLibCheck": false,
 		"noEmit": true,
+
+		"strictBindCallApply": true,
 	},
 }
