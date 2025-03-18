@@ -2,8 +2,6 @@
 /.*
 !/.gitignore
 !/.editorconfig
-!/.eslintrc.json
-!/.htmlhintrc
 
 /node_modules/
 /local/
