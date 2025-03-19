@@ -1,4 +1,5 @@
-import * as $music from '../lib/music.js'
+const a4Freq = 440
+const c4Freq = a4Freq * (2 ** (-9/12))
 
 const toneChannels = 4
 const noiseChannel = toneChannels
@@ -45,7 +46,7 @@ export function init(context) {
 
 	for (let c = 0; c < toneChannels; c++) {
 		oscillators[c] = context.createOscillator()
-		oscillators[c].frequency.value = $music.c4Freq
+		oscillators[c].frequency.value = c4Freq
 		oscillators[c].connect(gains[c])
 		oscillators[c].start()
 		sources[c] = oscillators[c]
