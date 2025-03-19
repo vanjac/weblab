@@ -4,8 +4,8 @@
 import * as $html from '../lib/html.js'
 import * as $array from '../lib/array.js'
 
-const width = 640
-const height = 640
+let width = 640
+let height = 640
 
 /** @type {CanvasRenderingContext2D} */
 let ctx
@@ -26,11 +26,13 @@ function draw() {
 	}
 }
 
-const mazeXLen = 53
-const mazeYLen = 53
-const spaces = $array.seq(mazeXLen, () => Array(mazeYLen).fill(false))
+let mazeXLen = 53
+let mazeYLen = 53
+
+let spaces = $array.seq(mazeXLen, () => Array(mazeYLen).fill(false))
 let filledSpaces = 0
-const mazeWallLen = 12
+
+let mazeWallLen = 12
 
 
 function makeMaze() {

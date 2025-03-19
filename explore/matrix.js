@@ -7,13 +7,14 @@ import * as $glShader from '../lib/glShader.js'
 import * as $mat4 from '../lib/mat4.js'
 import * as $colArr from '../lib/colArr.js'
 
-const width = 1024
-const height = 768
+let width = 1024
+let height = 768
 
-const modelMat = $mat4.translate($mat4.ident, [0, 0, -1])
-const texMat = Float32Array.of(1, 0, 0, 0, 1, 0, 0, 0, 1)
-const rotateSpeed = 1.5
-const viewDist = 3
+let modelMat = $mat4.translate($mat4.ident, [0, 0, -1])
+let texMat = Float32Array.of(1, 0, 0, 0, 1, 0, 0, 0, 1)
+let rotateSpeed = 1.5
+let viewDist = 3
+
 let world = true
 
 async function main() {

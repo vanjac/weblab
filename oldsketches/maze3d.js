@@ -6,32 +6,35 @@ import * as $array from '../lib/array.js'
 import * as $input from '../lib/input.js'
 /** @typedef {[number, number, number]} Color */
 
-const width = 960
-const height = 640
+let width = 960
+let height = 640
 
-const OTHER = 0
-const HORIZ = 1
-const VERT = 2
+let OTHER = 0
+let HORIZ = 1
+let VERT = 2
 
 
-const wallHeight = 256
+let wallHeight = 256
+
 //player pos is negative
 let playerX = -100
 let playerY = -100
 let xVel = 0, yVel = 0
 let playerRot = Math.PI
 
-const walkSpeed = 100
-const playerWidth = 24
+let walkSpeed = 100
+let playerWidth = 24
 
 let gameStarted = false
 
 
-const mazeXLen = 12
-const mazeYLen = 12
-const spaces = $array.seq(mazeXLen, () => Array(mazeYLen).fill(false))
+let mazeXLen = 12
+let mazeYLen = 12
+
+let spaces = $array.seq(mazeXLen, () => Array(mazeYLen).fill(false))
 let filledSpaces = 0
-const mazeWallLen = 256
+
+let mazeWallLen = 256
 
 class Wall {
 	/**

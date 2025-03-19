@@ -3,8 +3,8 @@
 import * as $html from '../lib/html.js'
 import * as $async from '../lib/async.js'
 
-const width = 400
-const height = 400
+let width = 400
+let height = 400
 
 async function main() {
 	let canvas = document.body.appendChild($html.canvas({width, height}))

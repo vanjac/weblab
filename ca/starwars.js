@@ -5,8 +5,8 @@ import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
 import * as $async from '../lib/async.js'
 
-const width = 768
-const height = 768
+let width = 768
+let height = 768
 
 function initialPattern() {
 	let canvas = $html.canvas({width, height})

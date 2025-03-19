@@ -4,22 +4,22 @@ import {$html, $gl, $glShader, $glImm, $mat4, $async, $vec, $colArr} from '../li
 import * as $array from '../lib/array.js'
 import * as $input from '../lib/input.js'
 
-const width = 1024
-const height = 768
+let width = 1024
+let height = 768
 
-const mazeDim = 12
+let mazeDim = 12
 
 /** @type {[number, boolean][]} */
-const directions = [[0, false], [0, true], [1, false], [1, true], [2, false], [2, true]]
+let directions = [[0, false], [0, true], [1, false], [1, true], [2, false], [2, true]]
 
-const wallColors = [
+let wallColors = [
 	$colArr.rgb(255, 24, 105),
 	$colArr.rgb(224, 0, 112),
 	$colArr.rgb(207, 20, 182),
 ]
 
-const lookSpeed = 0.01
-const moveSpeed = 0.03
+let lookSpeed = 0.01
+let moveSpeed = 0.03
 
 /**
  * @template T

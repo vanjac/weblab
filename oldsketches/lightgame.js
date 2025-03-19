@@ -5,15 +5,16 @@ import * as $html from '../lib/html.js'
 import * as $canvas from '../lib/canvas.js'
 import * as $array from '../lib/array.js'
 
-const width = 300
-const height = 300
+let width = 300
+let height = 300
 
-const numSquares = 10
-const squareSize = 30
-const flipSelf = false
-const litSquare = 'rgb(255, 255, 0)'
-const cBackground = 'rgb(0, 0, 0)'
-const cStroke = 'rgb(255, 255, 255)'
+let numSquares = 10
+let squareSize = 30
+let flipSelf = false
+let litSquare = 'rgb(255, 255, 0)'
+let cBackground = 'rgb(0, 0, 0)'
+let cStroke = 'rgb(255, 255, 255)'
+
 /** @type {LightSquare[][]} */
 let grid
 

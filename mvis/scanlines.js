@@ -6,14 +6,14 @@ import * as $glShader from '../lib/glShader.js'
 import * as $async from '../lib/async.js'
 import * as $array from '../lib/array.js'
 
-const width = 512
-const height = 512
+let width = 512
+let height = 512
 
-const texWidth = 32
-const texHeight = 64
-const sampleSize = texWidth * texHeight
+let texWidth = 32
+let texHeight = 64
+let sampleSize = texWidth * texHeight
 
-const numChannels = 2
+let numChannels = 2
 
 async function main() {
 	let input = $html.input({type: 'file', accept: 'audio/*'})

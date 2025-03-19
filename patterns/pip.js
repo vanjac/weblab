@@ -3,17 +3,17 @@
 import * as $html from '../lib/html.js'
 import * as $async from '../lib/async.js'
 
-const width = 768
-const height = 768
+let width = 768
+let height = 768
 
-const xScroll = -.04
-const yScroll = -.03
-const bgCol = '#d03'
-const bgAlpha = .05
-const sqSpin = .0002
-const sqScale = .5
-const sqAlpha = .5
-const hueRot = -15
+let xScroll = -.04
+let yScroll = -.03
+let bgCol = '#d03'
+let bgAlpha = .05
+let sqSpin = .0002
+let sqScale = .5
+let sqAlpha = .5
+let hueRot = -15
 
 /**
  * @param {number} a

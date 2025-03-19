@@ -6,23 +6,23 @@ import * as $input from '../lib/input.js'
 import * as $canvas from '../lib/canvas.js'
 import * as $vec from '../lib/vec.js'
 
-const width = 512
-const height = 512
+let width = 512
+let height = 512
 
-const bgCol = 'black'
-const traceColLight = 60
-const traceHueRate = .01
-const traceWidth = 4
-const tail = 1
-const fadeAlpha = 0.04
-const velRate = 0.5
-const accelRate = 0.05
-const repelRate = 0.8
-const feedbackScale = 1.005
-const feedbackBlur = 1
-const feedbackHue = 5
-const feedbackBright = 103
-const feedbackSat = 101
+let bgCol = 'black'
+let traceColLight = 60
+let traceHueRate = .01
+let traceWidth = 4
+let tail = 1
+let fadeAlpha = 0.04
+let velRate = 0.5
+let accelRate = 0.05
+let repelRate = 0.8
+let feedbackScale = 1.005
+let feedbackBlur = 1
+let feedbackHue = 5
+let feedbackBright = 103
+let feedbackSat = 101
 
 /**
  * @typedef {{

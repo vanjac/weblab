@@ -6,10 +6,11 @@ import * as $ui from '../lib/ui.js'
 import * as $canvas from '../lib/canvas.js'
 import * as $input from '../lib/input.js'
 
-const width = 256
-const height = 256
+let width = 256
+let height = 256
 
-const fillRate = 10
+let fillRate = 10
+
 let spreadRatio = .7
 
 let materials = new Float32Array(width * (height + 1))

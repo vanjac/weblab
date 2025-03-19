@@ -3,14 +3,14 @@
 
 import * as $html from '../lib/html.js'
 
-const width = 192
-const height = 192
+let width = 192
+let height = 192
 
-const STROKE_WIDTH = 6
-const NORMAL_RADIUS = 128
+let STROKE_WIDTH = 6
+let NORMAL_RADIUS = 128
 let CIRCLE_RADIUS = 0
-const ZOOM_TIME = 256
-const WAIT_TIME = 1000
+let ZOOM_TIME = 256
+let WAIT_TIME = 1000
 
 let loadAmount = 0
 
