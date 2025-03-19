@@ -121,11 +121,12 @@ function generateMaze() {
 
 /**
  * @param {[number, number, number]} camPos
- * @param {$mat4.Mat4} invLookMat
+ * @param {DOMMatrixReadOnly} invLookMat
  * @param {number[]} vec
  */
 function moveCamera(camPos, invLookMat, vec) {
-	let [x, y, z] = $mat4.transform(invLookMat, $vec.mul(vec, moveSpeed))
+	let point = new DOMPoint(...$vec.mul(vec, moveSpeed), 0)
+	let {x, y, z} = invLookMat.transformPoint(point)
 	return $vec.add(camPos, [x, y, z])
 }
 
@@ -168,10 +169,10 @@ async function main() {
 		await $async.frame()
 		$gl.checkError(gl)
 
-		let lookMat = $mat4.ident
-		lookMat = $mat4.rotate(lookMat, -camPitch, [1, 0, 0])
-		lookMat = $mat4.rotate(lookMat, -camYaw, [0, 0, 1])
-		let invLookMat = $mat4.invert(lookMat)
+		let lookMat = DOMMatrix.fromFloat32Array($mat4.ident)
+		lookMat.rotateAxisAngleSelf(1, 0, 0, -camPitch * 180 / Math.PI)
+		lookMat.rotateAxisAngleSelf(0, 0, 1, -camYaw * 180 / Math.PI)
+		let invLookMat = lookMat.inverse()
 
 		if ($input.codes['KeyD']) {
 			camPos = moveCamera(camPos, invLookMat, [1, 0, 0])
@@ -192,8 +193,8 @@ async function main() {
 			camPos = moveCamera(camPos, invLookMat, [0, 0, -1])
 		}
 
-		let viewMat = $mat4.translate(lookMat, $vec.neg(camPos))
-		gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, viewMat)
+		let viewMat = lookMat.translate(...$vec.neg(camPos))
+		gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, viewMat.toFloat32Array())
 
 		gl.clearColor(...$colArr.rgba(45, 0, 90, 1))
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)

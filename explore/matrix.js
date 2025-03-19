@@ -10,7 +10,7 @@ import * as $colArr from '../lib/colArr.js'
 let width = 1024
 let height = 768
 
-let modelMat = $mat4.translate($mat4.ident, [0, 0, -1])
+let modelMat = DOMMatrix.fromFloat32Array($mat4.ident).translate(0, 0, -1).toFloat32Array()
 let texMat = Float32Array.of(1, 0, 0, 0, 1, 0, 0, 0, 1)
 let rotateSpeed = 1.5
 let viewDist = 3
@@ -97,10 +97,10 @@ async function main() {
 		gl.uniformMatrix3fv(prog.uniforms.uTexMat0, false, texMat)
 		if (world) {
 			gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj)
-			let viewMat = $mat4.ident
-			viewMat = $mat4.translate(viewMat, [0, viewDist, 0])
-			viewMat = $mat4.rotate(viewMat, time / 1000 * rotateSpeed, [0, 0, 1])
-			gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, viewMat)
+			let viewMat = DOMMatrix.fromFloat32Array($mat4.ident)
+			viewMat.translateSelf(0, viewDist, 0)
+			viewMat.rotateAxisAngleSelf(0, 0, 1, time / 1000 * rotateSpeed * 180 / Math.PI)
+			gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, viewMat.toFloat32Array())
 		} else {
 			gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, $mat4.ident)
 			gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, $mat4.ident)
