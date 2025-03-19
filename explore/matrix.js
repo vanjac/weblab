@@ -5,9 +5,7 @@ import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
 import * as $mat4 from '../lib/mat4.js'
-import * as $math from '../lib/math.js'
 import * as $colArr from '../lib/colArr.js'
-import * as $fetch from '../lib/fetch.js'
 
 const width = 1024
 const height = 768
@@ -21,9 +19,10 @@ let world = true
 async function main() {
 	let canvas = $html.canvas({width, height})
 
-	let modelMatDiv = $html.div({style: 'display: inline-block;'})
+	let modelMatDiv = document.createElement('div')
+	modelMatDiv.style = 'display: inline-block;'
 	for (let row = 0; row < 4; row++) {
-		let div = modelMatDiv.appendChild($html.div())
+		let div = modelMatDiv.appendChild(document.createElement('div'))
 		for (let col = 0; col < 4; col++) {
 			let idx = row + col * 4
 			let input = $html.input({type: 'number', min: '-99', max: '99', step: '.1'})
@@ -37,9 +36,10 @@ async function main() {
 		}
 	}
 
-	let texMatDiv = $html.div({style: 'display: inline-block'})
+	let texMatDiv = document.createElement('div')
+	texMatDiv.style = 'display: inline-block'
 	for (let row = 0; row < 3; row++) {
-		let div = texMatDiv.appendChild($html.div())
+		let div = texMatDiv.appendChild(document.createElement('div'))
 		for (let col = 0; col < 3; col++) {
 			let idx = row + col * 3
 			let input = $html.input({type: 'number', min: '-99', max: '99', step: '.1'})
@@ -71,11 +71,12 @@ async function main() {
 
 	gl.useProgram(prog.program)
 
-	let proj = $mat4.perspective($math.radians(90), width/height, 0.03)
+	let proj = $mat4.perspective(Math.PI / 2, width/height, 0.03)
 
 	let planeVao = $gl.createScreenRectVAO(gl)
 
-	let img = await $fetch.imageBitmap(import.meta.resolve('./five.png'))
+	let request = await fetch(import.meta.resolve('./five.png'))
+	let img = await request.blob().then(b => window.createImageBitmap(b))
 	$gl.createTexture(gl, img)
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT)
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT)

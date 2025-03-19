@@ -1,4 +1,3 @@
-import * as $math from '../lib/math.js'
 import * as $music from '../lib/music.js'
 
 const toneChannels = 4
@@ -90,7 +89,7 @@ function setWave(channel, wave) {
  * @param {number} cents
  */
 function setPitch(channel, cents) {
-	cents = $math.clamp(cents | 0, 0, 16383)
+	cents = Math.min(Math.max(cents | 0, 0), 16383)
 	sources[channel].detune.value = cents - c4Cents
 }
 
@@ -99,7 +98,7 @@ function setPitch(channel, cents) {
  * @param {number} vol 0 - 255
  */
 function setVol(channel, vol) {
-	vol = $math.clamp(vol | 0, 0, 255)
+	vol = Math.min(Math.max(vol | 0, 0), 255)
 	gains[channel].gain.value = vol / 255
 }
 
@@ -108,6 +107,6 @@ function setVol(channel, vol) {
  * @param {number} pan
  */
 function setPan(channel, pan) {
-	pan = $math.clamp(pan | 0, -1, 1)
+	pan = Math.min(Math.max(pan | 0, -1), 1)
 	panners[channel].pan.value = pan
 }

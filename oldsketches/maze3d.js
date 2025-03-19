@@ -1,7 +1,7 @@
 // Date: 2016-04-16
 // Ported to JS: 2024-10-18
 
-import {$html, $math, $gl, $glShader, $glImm, $mat4, $colArr} from '../lib/index-3d.js'
+import {$html, $gl, $glShader, $glImm, $mat4, $colArr} from '../lib/index-3d.js'
 import * as $array from '../lib/array.js'
 import * as $input from '../lib/input.js'
 /** @typedef {[number, number, number]} Color */
@@ -113,7 +113,7 @@ function setup() {
  */
 function mouseMove(dx, dy) {
 	if ($input.mouse.buttons & 1) {
-		playerRot += $math.radians(dx) / 2
+		playerRot += dx * Math.PI / 360
 	}
 }
 
@@ -177,7 +177,7 @@ function draw() {
  */
 function cameraPoint(x, y, rotation) {
 	let cameraY = height/2.0
-	let fov = $math.radians(95)
+	let fov = 95 * Math.PI / 180
 	let cameraZ = cameraY / Math.tan(fov / 2.0)
 	let aspect = width / height
 

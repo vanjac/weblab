@@ -93,7 +93,8 @@ function offSquare(x, y) {
 function onSquare(x, y) {
 	ctx.fillStyle = litSquare
 	ctx.strokeStyle = cStroke
-	let circle = $canvas.circle((x + 0.5) * squareSize, (y + 0.5) * squareSize, squareSize / 2)
+	let circle = new Path2D()
+	circle.arc((x + 0.5) * squareSize, (y + 0.5) * squareSize, squareSize / 2, 0, 2 * Math.PI)
 	ctx.fill(circle)
 	ctx.stroke(circle)
 }

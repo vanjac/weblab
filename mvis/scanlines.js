@@ -3,7 +3,6 @@
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
-import * as $fetch from '../lib/fetch.js'
 import * as $async from '../lib/async.js'
 import * as $array from '../lib/array.js'
 
@@ -20,7 +19,8 @@ async function main() {
 	let input = $html.input({type: 'file', accept: 'audio/*'})
 
 	let src = new URLSearchParams(window.location.search).get('file')
-	let audio = $html.audio({controls: true, src})
+	let audio = document.createElement('audio')
+	Object.assign(audio, {controls: true, src})
 	audio.style.display = 'block'
 	audio.style.width = '100%'
 
@@ -34,7 +34,7 @@ async function main() {
 	document.body.append(input, audio, canvas)
 
 	let screenVao = $gl.createScreenRectVAO(gl)
-	let shaderSrc = await $fetch.text(import.meta.resolve('./scanlines.frag'))
+	let shaderSrc = await fetch(import.meta.resolve('./scanlines.frag')).then(r => r.text())
 	let prog = $gl.createProgram(gl, [$gl.createShader(gl, shaderSrc), $glShader.basicVert(gl)])
 
 	let audioCtx = new AudioContext()

@@ -1,4 +1,4 @@
-import * as $file from '../lib/file.js'
+import * as $html from '../lib/html.js'
 
 const doctype = '<!DOCTYPE html>'
 
@@ -84,12 +84,12 @@ function handleCommand(command) {
 	} else if (command == 'new') {
 		iframe.srcdoc = doctype
 	} else if (command == 'open') {
-		$file.pickFiles('.html,.htm,.txt,text/html,text/plain')
+		pickFiles('.html,.htm,.txt,text/html,text/plain')
 			.then(files => openFile(files[0]))
 			.catch(() => {})
 	} else if (command == 'save') {
 		let blob = new Blob([documentHTML(iframe.contentDocument)], {type: 'text/plain'})
-		$file.download(blob, (iframe.contentDocument.title || 'untitled') + '.html')
+		download(blob, (iframe.contentDocument.title || 'untitled') + '.html')
 	} else if (command == 'print') {
 		iframe.contentWindow.print()
 	}
@@ -127,6 +127,24 @@ function onKeyDown(e) {
 }
 
 /**
+ * Must be triggered by user action!
+ * @param {string} accept
+ * @returns {Promise<File[]>}
+ */
+function pickFiles(accept = '', multiple = false) {
+	return new Promise((resolve, reject) => {
+		let input = $html.input({type: 'file', accept, multiple})
+		input.addEventListener('change', () => {
+			resolve(Array.from(input.files))
+		})
+		input.addEventListener('cancel', () => {
+			reject()
+		})
+		input.click()
+	})
+}
+
+/**
  * @param {Blob} blob
  */
 function openFile(blob) {
@@ -146,6 +164,18 @@ function documentHTML(document) {
 	let clone = /** @type {Document} */(document.cloneNode(true))
 	clone.body.style.overflowWrap = null
 	return doctype + '\n' + clone.documentElement.outerHTML
+}
+
+/**
+ * @param {Blob} blob
+ * @param {string} name
+ */
+function download(blob, name = '') {
+	let url = URL.createObjectURL(blob)
+	let link = document.createElement('a')
+	Object.assign(link, {href: url, download: name})
+	link.click()
+	URL.revokeObjectURL(url)
 }
 
 function onDocumentLoaded() {

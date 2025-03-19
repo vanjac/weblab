@@ -1,6 +1,6 @@
 // Date: 2024-11-05
 
-import {$math, $html, $gl, $glShader, $glImm, $mat4, $async, $vec, $colArr} from '../lib/index-3d.js'
+import {$html, $gl, $glShader, $glImm, $mat4, $async, $vec, $colArr} from '../lib/index-3d.js'
 import * as $array from '../lib/array.js'
 import * as $input from '../lib/input.js'
 
@@ -20,6 +20,20 @@ const wallColors = [
 
 const lookSpeed = 0.01
 const moveSpeed = 0.03
+
+/**
+ * @template T
+ * @param {T[]} arr
+ */
+function shuffled(arr) {
+	// https://stackoverflow.com/a/12646864
+	arr = [...arr]
+	for (let i = arr.length - 1; i >= 0; i--) {
+		let j = Math.floor(Math.random() * (i + 1))
+		;[arr[i], arr[j]] = [arr[j], arr[i]]
+	}
+	return arr
+}
 
 /**
  * @returns {[Float32Array, Float32Array, Float32Array]}
@@ -51,12 +65,12 @@ function generateMaze() {
 	]
 	let colors = Array(3).fill($colArr.rgb(255, 230, 120)).flat()
 	while (trails.length) {
-		let idx = $math.randInt(0, trails.length - 1)
+		let idx = Math.floor(Math.random() * trails.length)
 		let pos = trails[idx]
 
 		/** @type {number[]} */
 		let movePos
-		for (let [axis, dir] of $array.shuffled(directions)) {
+		for (let [axis, dir] of shuffled(directions)) {
 			let next = $vec.add(pos, $vec.axis(3, axis, dir ? 1 : -1))
 			if (!spaces[next[0]][next[1]][next[2]]) {
 				movePos = next
@@ -130,7 +144,7 @@ async function main() {
 	])
 	gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, $mat4.ident)
 
-	let proj = $mat4.perspective($math.radians(90), width/height, 0.03)
+	let proj = $mat4.perspective(Math.PI / 2, width/height, 0.03)
 	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj)
 
 	gl.enableVertexAttribArray($gl.boundAttr.aPosition)

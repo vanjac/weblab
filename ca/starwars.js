@@ -4,7 +4,6 @@ import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
 import * as $async from '../lib/async.js'
-import * as $fetch from '../lib/fetch.js'
 
 const width = 768
 const height = 768
@@ -26,7 +25,7 @@ async function main() {
 	let gl = canvas.getContext('webgl2')
 
 	let screenVao = $gl.createScreenRectVAO(gl)
-	let shaderSrc = await $fetch.text(import.meta.resolve('./starwars.frag'))
+	let shaderSrc = await fetch(import.meta.resolve('./starwars.frag')).then(r => r.text())
 	let prog = $gl.createProgram(gl, [
 		$gl.createShader(gl, shaderSrc),
 		$glShader.basicVert(gl),

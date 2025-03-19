@@ -2,7 +2,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $async from '../lib/async.js'
-import * as $math from '../lib/math.js'
 
 const width = 768
 const height = 768
@@ -15,6 +14,14 @@ const sqSpin = .0002
 const sqScale = .5
 const sqAlpha = .5
 const hueRot = -15
+
+/**
+ * @param {number} a
+ * @param {number} b
+ */
+function mod(a, b) {
+	return ((a % b) + b) % b
+}
 
 async function main() {
 	let canvas = document.body.appendChild($html.canvas({width, height}))
@@ -42,7 +49,7 @@ async function main() {
 					let trY = height * (.25 + y / 2) + (yOff % (height / 2))
 					ctx.translate(trX, trY)
 					let checker = x + y + Math.floor(xOff / width * 2) + Math.floor(yOff / width * 2)
-					ctx.rotate(time * sqSpin + $math.mod(checker, 2) * Math.PI / 4)
+					ctx.rotate(time * sqSpin + mod(checker, 2) * Math.PI / 4)
 					ctx.scale(sqScale, sqScale)
 					ctx.translate(-width/2, -height/2)
 					ctx.drawImage(bgCanvas, 0, 0)
