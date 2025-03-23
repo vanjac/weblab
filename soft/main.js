@@ -131,9 +131,9 @@ function onKeyDown(e) {
  * @param {string} accept
  * @returns {Promise<File[]>}
  */
-function pickFiles(accept = '', multiple = false) {
+function pickFiles(accept = '') {
 	return new Promise((resolve, reject) => {
-		let input = $html.input({type: 'file', accept, multiple})
+		let input = $html.input({type: 'file', accept})
 		input.addEventListener('change', () => {
 			resolve(Array.from(input.files))
 		})
