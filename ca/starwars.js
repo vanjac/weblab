@@ -3,7 +3,6 @@
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
-import * as $async from '../lib/async.js'
 
 let width = 768
 let height = 768
@@ -37,7 +36,7 @@ async function main() {
 	gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)
 
 	while (true) {
-		await $async.frame()
+		await new Promise(r => requestAnimationFrame(r))
 		$gl.checkError(gl)
 		gl.useProgram(prog.program)
 		gl.bindVertexArray(screenVao)

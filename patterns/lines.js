@@ -1,7 +1,6 @@
 // Date: 2023-10-05
 
 import * as $html from '../lib/html.js'
-import * as $async from '../lib/async.js'
 
 let width = 400
 let height = 400
@@ -12,7 +11,8 @@ async function main() {
 	ctx.filter = 'blur(1px) brightness(200%)'
 
 	while (true) {
-		let time = await $async.frame()
+		/** @type {number} */
+		let time = await new Promise(r => requestAnimationFrame(r))
 
 		ctx.fillStyle = '#011'
 		ctx.fillRect(0, 0, canvas.width, canvas.height)

@@ -1,6 +1,6 @@
 // Date: 2024-11-05
 
-import {$html, $gl, $glShader, $glImm, $mat4, $async, $vec, $colArr} from '../lib/index-3d.js'
+import {$html, $gl, $glShader, $glImm, $mat4, $vec, $colArr} from '../lib/index-3d.js'
 import * as $array from '../lib/array.js'
 import * as $input from '../lib/input.js'
 
@@ -166,7 +166,7 @@ async function main() {
 	})
 
 	while (true) {
-		await $async.frame()
+		await new Promise(r => requestAnimationFrame(r))
 		$gl.checkError(gl)
 
 		let lookMat = DOMMatrix.fromFloat32Array($mat4.ident)

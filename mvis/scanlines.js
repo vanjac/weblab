@@ -3,7 +3,6 @@
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
-import * as $async from '../lib/async.js'
 import * as $array from '../lib/array.js'
 
 let width = 512
@@ -61,7 +60,7 @@ async function main() {
 	}
 
 	while (true) {
-		await $async.frame()
+		await new Promise(r => requestAnimationFrame(r))
 		$gl.checkError(gl)
 
 		for (let c = 0; c < numChannels; c++) {

@@ -1,6 +1,5 @@
 // Date: 2024-11-14
 
-import * as $async from '../lib/async.js'
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
@@ -90,7 +89,8 @@ async function main() {
 	gl.vertexAttrib4fv($gl.boundAttr.aColor, $colArr.rgba(255, 255, 255, 1))
 
 	while (true) {
-		let time = await $async.frame()
+		/** @type {number} */
+		let time = await new Promise(r => requestAnimationFrame(r))
 		$gl.checkError(gl)
 
 		gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, modelMat)

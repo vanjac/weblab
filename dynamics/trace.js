@@ -1,7 +1,6 @@
 // Date: 2024-10-30
 
 import * as $html from '../lib/html.js'
-import * as $async from '../lib/async.js'
 import * as $input from '../lib/input.js'
 import * as $canvas from '../lib/canvas.js'
 import * as $vec from '../lib/vec.js'
@@ -49,7 +48,8 @@ async function main() {
 	ctx.fillRect(0, 0, width, height)
 
 	while (true) {
-		let time = await $async.frame()
+		/** @type {number} */
+		let time = await new Promise(r => requestAnimationFrame(r))
 		let mouseDown = $input.mouse.buttons & 1
 
 		let filter = `brightness(${feedbackBright}%) saturate(${feedbackSat}%)`

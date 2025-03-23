@@ -1,7 +1,6 @@
 // Date: 2024-10-20
 
 import * as $html from '../lib/html.js'
-import * as $async from '../lib/async.js'
 
 let width = 768
 let height = 768
@@ -31,7 +30,8 @@ async function main() {
 	let bgCtx = bgCanvas.getContext('2d')
 
 	while (true) {
-		let time = await $async.frame()
+		/** @type {number} */
+		let time = await new Promise(r => requestAnimationFrame(r))
 
 		ctx.filter = `hue-rotate(${hueRot}deg)`
 		ctx.globalAlpha = bgAlpha

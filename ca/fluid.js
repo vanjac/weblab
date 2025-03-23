@@ -1,6 +1,5 @@
 // Date: 2024-10-28
 
-import * as $async from '../lib/async.js'
 import * as $html from '../lib/html.js'
 import * as $ui from '../lib/ui.js'
 import * as $canvas from '../lib/canvas.js'
@@ -42,7 +41,7 @@ async function main() {
 	}))
 
 	while (true) {
-		await $async.frame()
+		await new Promise(r => requestAnimationFrame(r))
 
 		let [mx, my] = $canvas.mousePos(canvas, $input.mouse)
 		if (mx >= 0 && mx < width && my >= 0 && my < height) {
