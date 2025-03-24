@@ -1,6 +1,6 @@
 // Date: 2024-11-05
 
-import {$html, $gl, $glShader, $glImm, $mat4, $vec, $colArr} from '../lib/index-3d.js'
+import {$html, $gl, $glShader, $glImm, $mat4, $colArr} from '../lib/index-3d.js'
 import * as $array from '../lib/array.js'
 import * as $input from '../lib/input.js'
 
@@ -34,6 +34,35 @@ function shuffled(arr) {
 	}
 	return arr
 }
+
+/**
+ * @param {number} axis
+ * @param {number} value
+ */
+function axisVec(axis, value = 1) {
+	/** @type {[number, number, number]} */
+	let vec = [0, 0, 0]
+	vec[axis % 3] = value
+	return vec
+}
+
+/**
+ * @param {readonly number[]} a
+ * @param {readonly number[]} b
+ * @returns {[number, number, number]}
+ */
+function vecAdd([a0, a1, a2], [b0, b1, b2]) {
+	return [a0 + b0, a1 + b1, a2 + b2]
+}
+
+/**
+ * @param {readonly number[]} a
+ * @param {readonly number[]} b
+ */
+export function vecEq(a, b) {
+	return a.every((e, i) => e == b[i])
+}
+
 
 /**
  * @returns {[Float32Array, Float32Array, Float32Array]}
@@ -71,7 +100,7 @@ function generateMaze() {
 		/** @type {number[]} */
 		let movePos
 		for (let [axis, dir] of shuffled(directions)) {
-			let next = $vec.add(pos, $vec.axis(3, axis, dir ? 1 : -1))
+			let next = vecAdd(pos, axisVec(axis, dir ? 1 : -1))
 			if (!spaces[next[0]][next[1]][next[2]]) {
 				movePos = next
 				break
@@ -83,30 +112,30 @@ function generateMaze() {
 			spaces[movePos[0]][movePos[1]][movePos[2]] = true
 			lines = lines.concat([...pos, ...movePos]) // TODO: add walls
 			for (let axis = 0; axis < 3; axis++) {
-				let adj = $vec.add(movePos, $vec.axis(3, axis))
-				let uAxis = $vec.axis(3, axis + 1)
-				let vAxis = $vec.axis(3, axis + 2)
+				let adj = vecAdd(movePos, axisVec(axis))
+				let uAxis = axisVec(axis + 1)
+				let vAxis = axisVec(axis + 2)
 				let color = wallColors[axis]
-				if (!$vec.eq(adj, pos) && spaces[adj[0]][adj[1]][adj[2]]) {
+				if (!vecEq(adj, pos) && spaces[adj[0]][adj[1]][adj[2]]) {
 					tris = tris.concat([
 						...adj,
-						...$vec.add(adj, uAxis),
-						...$vec.add($vec.add(adj, uAxis), vAxis),
+						...vecAdd(adj, uAxis),
+						...vecAdd(vecAdd(adj, uAxis), vAxis),
 						...adj,
-						...$vec.add($vec.add(adj, uAxis), vAxis),
-						...$vec.add(adj, vAxis),
+						...vecAdd(vecAdd(adj, uAxis), vAxis),
+						...vecAdd(adj, vAxis),
 					])
 					colors = colors.concat(Array(6).fill(color).flat())
 				}
-				adj = $vec.add(movePos, $vec.axis(3, axis, -1))
-				if (!$vec.eq(adj, pos) && spaces[adj[0]][adj[1]][adj[2]]) {
+				adj = vecAdd(movePos, axisVec(axis, -1))
+				if (!vecEq(adj, pos) && spaces[adj[0]][adj[1]][adj[2]]) {
 					tris = tris.concat([
 						...movePos,
-						...$vec.add(movePos, uAxis),
-						...$vec.add($vec.add(movePos, uAxis), vAxis),
+						...vecAdd(movePos, uAxis),
+						...vecAdd(vecAdd(movePos, uAxis), vAxis),
 						...movePos,
-						...$vec.add($vec.add(movePos, uAxis), vAxis),
-						...$vec.add(movePos, vAxis),
+						...vecAdd(vecAdd(movePos, uAxis), vAxis),
+						...vecAdd(movePos, vAxis),
 					])
 					colors = colors.concat(Array(6).fill(color).flat())
 				}
@@ -125,9 +154,9 @@ function generateMaze() {
  * @param {number[]} vec
  */
 function moveCamera(camPos, invLookMat, vec) {
-	let point = new DOMPoint(...$vec.mul(vec, moveSpeed), 0)
+	let point = new DOMPoint(...vec.map(_=> _ * moveSpeed), 0)
 	let {x, y, z} = invLookMat.transformPoint(point)
-	return $vec.add(camPos, [x, y, z])
+	return vecAdd(camPos, [x, y, z])
 }
 
 async function main() {
@@ -193,7 +222,7 @@ async function main() {
 			camPos = moveCamera(camPos, invLookMat, [0, 0, -1])
 		}
 
-		let viewMat = lookMat.translate(...$vec.neg(camPos))
+		let viewMat = lookMat.translate(...camPos.map(_=> 0 - _))
 		gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, viewMat.toFloat32Array())
 
 		gl.clearColor(...$colArr.rgba(45, 0, 90, 1))

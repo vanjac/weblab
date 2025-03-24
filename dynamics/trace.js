@@ -3,7 +3,6 @@
 import * as $html from '../lib/html.js'
 import * as $input from '../lib/input.js'
 import * as $canvas from '../lib/canvas.js'
-import * as $vec from '../lib/vec.js'
 
 let width = 512
 let height = 512
@@ -77,10 +76,10 @@ async function main() {
 			let tarVelY = (mouseY - trace.y) * (mouseDown ? 1 : velRate)
 			for (let other of traces) {
 				if (other != trace) {
-					let [dx, dy] = $vec.normalize([trace.x - other.x, trace.y - other.y])
-					;[dx, dy] = $vec.mul([dx, dy], $vec.mag([trace.velX, trace.velY]))
-					tarVelX += dx * repelRate
-					tarVelY += dy * repelRate
+					let dist = Math.hypot(trace.x - other.x, trace.y - other.y)
+					let velMag = Math.hypot(trace.velX, trace.velY)
+					tarVelX += (trace.x - other.x) / dist * velMag * repelRate
+					tarVelY += (trace.y - other.y) / dist * velMag * repelRate
 				}
 			}
 			trace.velX += (tarVelX - trace.velX) * accelRate
