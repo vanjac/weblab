@@ -1,7 +1,6 @@
 // Date: 2024-10-28
 
 import * as $html from '../lib/html.js'
-import * as $ui from '../lib/ui.js'
 import * as $canvas from '../lib/canvas.js'
 import * as $input from '../lib/input.js'
 
@@ -35,10 +34,29 @@ async function main() {
 	let ctx = canvas.getContext('2d')
 	let imageData = ctx.createImageData(width, height)
 
-	document.body.append(canvas, $ui.rangeSpinner({
-		value: spreadRatio, callback: v => spreadRatio = v,
-		rangeMin: 0.01, rangeMax: 999, logScale: true,
-	}))
+	let spreadRange = $html.input({
+		type: 'range',
+		min: Math.log(0.01).toString(),
+		max: Math.log(999).toString(),
+		step: 'any',
+		style: 'flex-grow: 1;',
+		valueAsNumber: Math.log(spreadRatio),
+	})
+	let spreadNum = $html.input({
+		type: 'number',
+		valueAsNumber: spreadRatio,
+	})
+	spreadRange.addEventListener('input', () => {
+		spreadRatio = Math.exp(spreadRange.valueAsNumber)
+		spreadNum.valueAsNumber = spreadRatio
+	})
+	spreadNum.addEventListener('input', () => {
+		spreadRatio = spreadNum.valueAsNumber
+		spreadRange.valueAsNumber = Math.log(spreadRatio)
+	})
+	let flex = $html.span({style: 'display: flex'}, [spreadRange, spreadNum])
+
+	document.body.append(canvas, flex)
 
 	while (true) {
 		await new Promise(r => requestAnimationFrame(r))
