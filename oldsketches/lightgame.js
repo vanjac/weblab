@@ -2,7 +2,7 @@
 // Ported to JS: 2024-10-16
 
 import * as $html from '../lib/html.js'
-import * as $canvas from '../lib/canvas.js'
+import * as $input from '../lib/input.js'
 import * as $array from '../lib/array.js'
 
 let width = 300
@@ -104,7 +104,7 @@ function onSquare(x, y) {
  * @param {MouseEvent} e
  */
 function mouseClicked(e) {
-	let [mouseX, mouseY] = $canvas.mousePos(ctx.canvas, e)
+	let [mouseX, mouseY] = $input.canvasMousePos(ctx.canvas, e)
 	grid[Math.floor(mouseX / squareSize)][Math.floor(mouseY / squareSize)].clicked()
 }
 

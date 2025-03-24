@@ -2,7 +2,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $input from '../lib/input.js'
-import * as $canvas from '../lib/canvas.js'
 
 let width = 512
 let height = 512
@@ -67,7 +66,7 @@ async function main() {
 
 		ctx.globalAlpha = 1
 
-		let [mouseX, mouseY] = $canvas.mousePos(canvas, $input.mouse)
+		let [mouseX, mouseY] = $input.canvasMousePos(canvas)
 		let traceI = 0
 		for (let trace of traces) {
 			let ptraceX = trace.x, ptraceY = trace.y

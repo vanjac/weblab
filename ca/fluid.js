@@ -1,7 +1,6 @@
 // Date: 2024-10-28
 
 import * as $html from '../lib/html.js'
-import * as $canvas from '../lib/canvas.js'
 import * as $input from '../lib/input.js'
 
 let width = 256
@@ -61,7 +60,7 @@ async function main() {
 	while (true) {
 		await new Promise(r => requestAnimationFrame(r))
 
-		let [mx, my] = $canvas.mousePos(canvas, $input.mouse)
+		let [mx, my] = $input.canvasMousePos(canvas)
 		if (mx >= 0 && mx < width && my >= 0 && my < height) {
 			let ix = idx(mx, my)
 			if ($input.mouse.buttons & 1) {
