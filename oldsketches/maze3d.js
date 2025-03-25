@@ -2,7 +2,6 @@
 // Ported to JS: 2024-10-18
 
 import {$html, $gl, $glShader, $glImm, $mat4, $colArr} from '../lib/index-3d.js'
-import * as $array from '../lib/array.js'
 import * as $input from '../lib/input.js'
 /** @typedef {[number, number, number]} Color */
 
@@ -31,7 +30,7 @@ let gameStarted = false
 let mazeXLen = 12
 let mazeYLen = 12
 
-let spaces = $array.seq(mazeXLen, () => Array(mazeYLen).fill(false))
+let spaces = [...Array(mazeXLen)].map(_=> Array(mazeYLen).fill(false))
 let filledSpaces = 0
 
 let mazeWallLen = 256

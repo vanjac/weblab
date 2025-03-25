@@ -1,5 +1,3 @@
-import * as $array from '../lib/array.js'
-
 const cols = 80
 const rows = 25
 
@@ -42,9 +40,9 @@ export function init(parent) {
  * @param {number} bg
  */
 function clear(fg, bg) {
-	chars = $array.seq(rows, () => Array(cols).fill(32))
-	fgCols = $array.seq(rows, () => Array(cols).fill(fg))
-	bgCols = $array.seq(rows, () => Array(cols).fill(bg))
+	chars = [...Array(rows)].map(_=> Array(cols).fill(32))
+	fgCols = [...Array(rows)].map(_=> Array(cols).fill(fg))
+	bgCols = [...Array(rows)].map(_=> Array(cols).fill(bg))
 }
 
 /**

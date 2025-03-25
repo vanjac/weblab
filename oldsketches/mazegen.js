@@ -2,7 +2,6 @@
 // Ported to JS: 2024-10-16
 
 import * as $html from '../lib/html.js'
-import * as $array from '../lib/array.js'
 
 let width = 640
 let height = 640
@@ -29,7 +28,7 @@ function draw() {
 let mazeXLen = 53
 let mazeYLen = 53
 
-let spaces = $array.seq(mazeXLen, () => Array(mazeYLen).fill(false))
+let spaces = [...Array(mazeXLen)].map(_=> Array(mazeYLen).fill(false))
 let filledSpaces = 0
 
 let mazeWallLen = 12

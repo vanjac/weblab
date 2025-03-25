@@ -1,7 +1,6 @@
 // Date: 2024-11-05
 
 import {$html, $gl, $glShader, $glImm, $mat4, $colArr} from '../lib/index-3d.js'
-import * as $array from '../lib/array.js'
 import * as $input from '../lib/input.js'
 
 let width = 1024
@@ -70,7 +69,9 @@ export function vecEq(a, b) {
 function generateMaze() {
 	let startTime = performance.now()
 
-	let spaces = $array.seq(mazeDim, () => $array.seq(mazeDim, () => Array(mazeDim).fill(false)))
+	let spaces = [...Array(mazeDim)].map(_=>
+		[...Array(mazeDim)].map(_=> Array(mazeDim).fill(false))
+	)
 	for (let i = 0; i < mazeDim; i++) {
 		for (let j = 0; j < mazeDim; j++) {
 			spaces[i][j][0] = true

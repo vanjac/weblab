@@ -3,7 +3,6 @@
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
-import * as $array from '../lib/array.js'
 
 let width = 512
 let height = 512
@@ -41,18 +40,20 @@ async function main() {
 	let source = audioCtx.createMediaElementSource(audio)
 	source.connect(splitter)
 	source.connect(audioCtx.destination)
-	let analysers = $array.seq(numChannels, c => {
+	/** @type {AnalyserNode[]} */
+	let analysers = []
+	for (let c = 0; c < numChannels; c++) {
 		let analyser = audioCtx.createAnalyser()
 		analyser.fftSize = sampleSize
 		splitter.connect(analyser, c)
-		return analyser
-	})
+		analysers.push(analyser)
+	}
 
 	audio.addEventListener('play', () => {
 		audioCtx.resume()
 	})
 
-	let dataArrays = $array.seq(numChannels, () => new Uint8Array(sampleSize))
+	let dataArrays = [...Array(numChannels)].map(_=> new Uint8Array(sampleSize))
 	for (let c = 0; c < numChannels; c++) {
 		gl.activeTexture(gl.TEXTURE0 + c)
 		$gl.createTexture(gl)

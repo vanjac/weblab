@@ -3,7 +3,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $input from '../lib/input.js'
-import * as $array from '../lib/array.js'
 
 let width = 300
 let height = 300
@@ -16,7 +15,7 @@ let cBackground = 'rgb(0, 0, 0)'
 let cStroke = 'rgb(255, 255, 255)'
 
 /** @type {LightSquare[][]} */
-let grid
+let grid = []
 
 /** @type {CanvasRenderingContext2D} */
 let ctx
@@ -73,7 +72,12 @@ function setup() {
 	ctx.translate(.5, .5)
 	ctx.fillStyle = cBackground
 	ctx.fillRect(0, 0, width, height)
-	grid = $array.seq(numSquares, x => $array.seq(numSquares, y => new LightSquare(x, y)))
+	for (let x = 0; x < numSquares; x++) {
+		grid.push([])
+		for (let y = 0; y < numSquares; y++) {
+			grid[x].push(new LightSquare(x, y))
+		}
+	}
 }
 
 /**
