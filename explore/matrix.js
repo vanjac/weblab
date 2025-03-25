@@ -4,7 +4,6 @@ import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glShader from '../lib/glShader.js'
 import * as $mat4 from '../lib/mat4.js'
-import * as $colArr from '../lib/colArr.js'
 
 let width = 1024
 let height = 768
@@ -85,8 +84,8 @@ async function main() {
 	gl.texParameterf(gl.TEXTURE_2D, glAniso.TEXTURE_MAX_ANISOTROPY_EXT, anisotropy)
 	gl.generateMipmap(gl.TEXTURE_2D)
 
-	gl.clearColor(...$colArr.rgba(127, 127, 127, 1))
-	gl.vertexAttrib4fv($gl.boundAttr.aColor, $colArr.rgba(255, 255, 255, 1))
+	gl.clearColor(0.5, 0.5, 0.5, 1)
+	gl.vertexAttrib4fv($gl.boundAttr.aColor, [1, 1, 1, 1])
 
 	while (true) {
 		/** @type {number} */

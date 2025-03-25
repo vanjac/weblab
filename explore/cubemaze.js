@@ -1,6 +1,6 @@
 // Date: 2024-11-05
 
-import {$html, $gl, $glShader, $glImm, $mat4, $colArr} from '../lib/index-3d.js'
+import {$html, $gl, $glShader, $glImm, $mat4} from '../lib/index-3d.js'
 import * as $input from '../lib/input.js'
 
 let width = 1024
@@ -12,13 +12,23 @@ let mazeDim = 12
 let directions = [[0, false], [0, true], [1, false], [1, true], [2, false], [2, true]]
 
 let wallColors = [
-	$colArr.rgb(255, 24, 105),
-	$colArr.rgb(224, 0, 112),
-	$colArr.rgb(207, 20, 182),
+	rgb(255, 24, 105),
+	rgb(224, 0, 112),
+	rgb(207, 20, 182),
 ]
 
 let lookSpeed = 0.01
 let moveSpeed = 0.03
+
+/**
+ * @param {number} r
+ * @param {number} g
+ * @param {number} b
+ * @returns {[number, number, number]}
+ */
+function rgb(r, g, b) {
+	return [r / 255, g / 255, b / 255]
+}
 
 /**
  * @template T
@@ -93,7 +103,7 @@ function generateMaze() {
 		mazeDim - 1, mazeDim - 2, mazeDim - 1,
 		mazeDim - 2, mazeDim - 1, mazeDim - 1,
 	]
-	let colors = Array(3).fill($colArr.rgb(255, 230, 120)).flat()
+	let colors = Array(3).fill(rgb(255, 230, 120)).flat()
 	while (trails.length) {
 		let idx = Math.floor(Math.random() * trails.length)
 		let pos = trails[idx]
@@ -226,7 +236,7 @@ async function main() {
 		let viewMat = lookMat.translate(...camPos.map(_=> 0 - _))
 		gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, viewMat.toFloat32Array())
 
-		gl.clearColor(...$colArr.rgba(45, 0, 90, 1))
+		gl.clearColor(...rgb(45, 0, 90), 1)
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 		// gl.vertexAttrib3f($gl.boundAttr.aColor, 1, 0, 0)

@@ -1,7 +1,7 @@
 // Date: 2016-04-16
 // Ported to JS: 2024-10-18
 
-import {$html, $gl, $glShader, $glImm, $mat4, $colArr} from '../lib/index-3d.js'
+import {$html, $gl, $glShader, $glImm, $mat4} from '../lib/index-3d.js'
 import * as $input from '../lib/input.js'
 /** @typedef {[number, number, number]} Color */
 
@@ -34,6 +34,16 @@ let spaces = [...Array(mazeXLen)].map(_=> Array(mazeYLen).fill(false))
 let filledSpaces = 0
 
 let mazeWallLen = 256
+
+/**
+ * @param {number} r
+ * @param {number} g
+ * @param {number} b
+ * @returns {[number, number, number]}
+ */
+function rgb(r, g, b) {
+	return [r / 255, g / 255, b / 255]
+}
 
 class Wall {
 	/**
@@ -122,7 +132,7 @@ function mouseMove(dx, dy) {
 function draw() {
 	window.requestAnimationFrame(draw)
 
-	gl.clearColor(...$colArr.rgba(95, 191, 255, 1))
+	gl.clearColor(...rgb(95, 191, 255), 1)
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 	for(let i = 0; i < 1000; i++) {
 		mazeStep()
@@ -158,7 +168,7 @@ function draw() {
 		wall(w.x1, w.y1, w.x2, w.y2, w.c)
 	}
 
-	gl.vertexAttrib3fv($gl.boundAttr.aColor, $colArr.rgb(255, 127, 0))
+	gl.vertexAttrib3fv($gl.boundAttr.aColor, rgb(255, 127, 0))
 	let xMax = mazeWallLen*mazeXLen
 	let yMax = mazeWallLen*mazeYLen
 
@@ -208,7 +218,7 @@ function wall(x1, y1, x2, y2, c) {
 	])
 	$glImm.vertexAttribData(gl, $gl.boundAttr.aPosition, vertices, 3, gl.FLOAT)
 	gl.drawArrays(gl.TRIANGLE_FAN, 0, 4)
-	gl.vertexAttrib3fv($gl.boundAttr.aColor, $colArr.rgb(0, 0, 0))
+	gl.vertexAttrib3fv($gl.boundAttr.aColor, rgb(0, 0, 0))
 	gl.drawArrays(gl.LINE_LOOP, 0, 4)
 }
 
@@ -219,7 +229,7 @@ function wall(x1, y1, x2, y2, c) {
  * @param {number} y2
  * @param {Color} c
  */
-function addWall(x1, y1, x2, y2, c = $colArr.rgb(255, 255, 255)) {
+function addWall(x1, y1, x2, y2, c = rgb(255, 255, 255)) {
 	walls.push(new Wall(x1, y1, x2, y2, c))
 }
 
@@ -260,10 +270,10 @@ function makeMaze() {
 	}
 	let xWallLoc = (mazeXLen-1)*mazeWallLen
 	let yWallLoc = (mazeYLen-1)*mazeWallLen
-	addWall(0,0,xWallLoc,0,$colArr.rgb(255,0,0))
-	addWall(0,0,0,yWallLoc,$colArr.rgb(255,255,0))
-	addWall(xWallLoc,yWallLoc,xWallLoc,0,$colArr.rgb(0,255,0))
-	addWall(xWallLoc,yWallLoc,0,yWallLoc,$colArr.rgb(0,0,255))
+	addWall(0,0,xWallLoc,0,rgb(255,0,0))
+	addWall(0,0,0,yWallLoc,rgb(255,255,0))
+	addWall(xWallLoc,yWallLoc,xWallLoc,0,rgb(0,255,0))
+	addWall(xWallLoc,yWallLoc,0,yWallLoc,rgb(0,0,255))
 }
 
 function mazeStep() {
