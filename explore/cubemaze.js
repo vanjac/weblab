@@ -1,6 +1,9 @@
 // Date: 2024-11-05
 
-import {$html, $gl, $glShader, $mat4} from '../lib/index-3d.js'
+import * as $html from '../lib/html.js'
+import * as $gl from '../lib/gl.js'
+import * as $glShader from '../lib/glShader.js'
+import * as $mat4 from '../lib/mat4.js'
 import * as $input from '../lib/input.js'
 
 let width = 1024

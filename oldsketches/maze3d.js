@@ -1,7 +1,11 @@
 // Date: 2016-04-16
 // Ported to JS: 2024-10-18
 
-import {$html, $gl, $glShader, $glImm, $mat4} from '../lib/index-3d.js'
+import * as $html from '../lib/html.js'
+import * as $gl from '../lib/gl.js'
+import * as $glShader from '../lib/glShader.js'
+import * as $glImm from '../lib/glImm.js'
+import * as $mat4 from '../lib/mat4.js'
 import * as $input from '../lib/input.js'
 /** @typedef {[number, number, number]} Color */
 
