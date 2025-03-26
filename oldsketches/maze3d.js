@@ -110,9 +110,10 @@ function setup() {
 		$glShader.basicVert(gl, {transform: true}),
 		$glShader.basicFrag(gl),
 	])
-	gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, $mat4.ident)
-	gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, $mat4.ident)
-	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, $mat4.ident)
+	let ident = new DOMMatrix().toFloat32Array()
+	gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, ident)
+	gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, ident)
+	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, ident)
 	gl.enableVertexAttribArray($gl.boundAttr.aPosition)
 
 	walls = []
@@ -194,7 +195,7 @@ function cameraPoint(x, y, rotation) {
 	let aspect = width / height
 
 	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, $mat4.perspective(fov, aspect, cameraZ/50.0))
-	let view = DOMMatrix.fromFloat32Array($mat4.ident)
+	let view = new DOMMatrix()
 	view.rotateAxisAngleSelf(0, 0, 1, -rotation * 180 / Math.PI + 90)
 	view.translateSelf(-x, -y, 0)
 	view.scaleSelf(-1, -1, -1)

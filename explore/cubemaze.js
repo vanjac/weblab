@@ -183,7 +183,7 @@ async function main() {
 		$glShader.basicVert(gl, {transform: true}),
 		$glShader.basicFrag(gl),
 	])
-	gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, $mat4.ident)
+	gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, new DOMMatrix().toFloat32Array())
 
 	let proj = $mat4.perspective(Math.PI / 2, width/height, 0.03)
 	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj)
@@ -208,7 +208,7 @@ async function main() {
 		await new Promise(r => requestAnimationFrame(r))
 		$gl.checkError(gl)
 
-		let lookMat = DOMMatrix.fromFloat32Array($mat4.ident)
+		let lookMat = new DOMMatrix()
 		lookMat.rotateAxisAngleSelf(1, 0, 0, -camPitch * 180 / Math.PI)
 		lookMat.rotateAxisAngleSelf(0, 0, 1, -camYaw * 180 / Math.PI)
 		let invLookMat = lookMat.inverse()

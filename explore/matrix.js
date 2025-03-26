@@ -8,7 +8,7 @@ import * as $mat4 from '../lib/mat4.js'
 let width = 1024
 let height = 768
 
-let modelMat = DOMMatrix.fromFloat32Array($mat4.ident).translate(0, 0, -1).toFloat32Array()
+let modelMat = new DOMMatrix().translate(0, 0, -1).toFloat32Array()
 let texMat = Float32Array.of(1, 0, 0, 0, 1, 0, 0, 0, 1)
 let rotateSpeed = 1.5
 let viewDist = 3
@@ -98,13 +98,14 @@ async function main() {
 		gl.uniformMatrix3fv(prog.uniforms.uTexMat0, false, texMat)
 		if (world) {
 			gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj)
-			let viewMat = DOMMatrix.fromFloat32Array($mat4.ident)
+			let viewMat = new DOMMatrix()
 			viewMat.translateSelf(0, viewDist, 0)
 			viewMat.rotateAxisAngleSelf(0, 0, 1, time / 1000 * rotateSpeed * 180 / Math.PI)
 			gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, viewMat.toFloat32Array())
 		} else {
-			gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, $mat4.ident)
-			gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, $mat4.ident)
+			let ident = new DOMMatrix().toFloat32Array()
+			gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, ident)
+			gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, ident)
 		}
 
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
