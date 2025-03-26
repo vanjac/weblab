@@ -56,7 +56,8 @@ async function main() {
 	let dataArrays = [...Array(numChannels)].map(_=> new Uint8Array(sampleSize))
 	for (let c = 0; c < numChannels; c++) {
 		gl.activeTexture(gl.TEXTURE0 + c)
-		$gl.createTexture(gl)
+		gl.bindTexture(gl.TEXTURE_2D, gl.createTexture())
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.R8, texWidth, texHeight, 0, gl.RED, gl.UNSIGNED_BYTE, null)
 	}
 

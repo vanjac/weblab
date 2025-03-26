@@ -76,9 +76,8 @@ async function main() {
 
 	let request = await fetch(import.meta.resolve('./five.png'))
 	let img = await request.blob().then(b => window.createImageBitmap(b))
-	$gl.createTexture(gl, img)
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT)
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT)
+	gl.bindTexture(gl.TEXTURE_2D, gl.createTexture())
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img)
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR)
 	let anisotropy = gl.getParameter(glAniso.MAX_TEXTURE_MAX_ANISOTROPY_EXT)
 	gl.texParameterf(gl.TEXTURE_2D, glAniso.TEXTURE_MAX_ANISOTROPY_EXT, anisotropy)
