@@ -72,7 +72,10 @@ async function main() {
 
 	let proj = $mat4.perspective(Math.PI / 2, width/height, 0.03)
 
-	let planeVao = $gl.createScreenRectVAO(gl)
+	let planePos = new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1])
+	let planeUV = new Float32Array([0,0, 1,0, 0,1, 0,1, 1,0, 1,1])
+	$gl.vertexAttribStatic(gl, $gl.boundAttr.aPosition, planePos, 2, gl.FLOAT)
+	$gl.vertexAttribStatic(gl, $gl.boundAttr.aTexCoord0, planeUV, 2, gl.FLOAT)
 
 	let request = await fetch(import.meta.resolve('./five.png'))
 	let img = await request.blob().then(b => window.createImageBitmap(b))
@@ -105,9 +108,7 @@ async function main() {
 		}
 
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
-		gl.bindVertexArray(planeVao)
 		gl.drawArrays(gl.TRIANGLES, 0, 6)
-		gl.bindVertexArray(null)
 	}
 }
 

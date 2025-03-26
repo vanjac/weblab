@@ -31,7 +31,11 @@ async function main() {
 
 	document.body.append(input, audio, canvas)
 
-	let screenVao = $gl.createScreenRectVAO(gl)
+	let posData = new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1])
+	let uvData = new Float32Array([0,0, 1,0, 0,1, 0,1, 1,0, 1,1])
+	$gl.vertexAttribStatic(gl, $gl.boundAttr.aPosition, posData, 2, gl.FLOAT)
+	$gl.vertexAttribStatic(gl, $gl.boundAttr.aTexCoord0, uvData, 2, gl.FLOAT)
+
 	let shaderSrc = await fetch(import.meta.resolve('./scanlines.frag')).then(r => r.text())
 	let prog = $gl.createProgram(gl, [$gl.createShader(gl, shaderSrc), $glShader.basicVert(gl)])
 
@@ -74,9 +78,7 @@ async function main() {
 		}
 
 		gl.useProgram(prog.program)
-		gl.bindVertexArray(screenVao)
 		gl.drawArrays(gl.TRIANGLES, 0, 6)
-		gl.bindVertexArray(null)
 	}
 }
 
