@@ -1,6 +1,6 @@
 // Date: 2024-11-05
 
-import {$html, $gl, $glShader, $glImm, $mat4} from '../lib/index-3d.js'
+import {$html, $gl, $glShader, $mat4} from '../lib/index-3d.js'
 import * as $input from '../lib/input.js'
 
 let width = 1024
@@ -188,10 +188,9 @@ async function main() {
 	let proj = $mat4.perspective(Math.PI / 2, width/height, 0.03)
 	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj)
 
-	gl.enableVertexAttribArray($gl.boundAttr.aPosition)
-	gl.enableVertexAttribArray($gl.boundAttr.aColor)
-
 	let [lines, tris, colors] = generateMaze()
+	$gl.vertexAttribStatic(gl, $gl.boundAttr.aPosition, tris, 3, gl.FLOAT)
+	$gl.vertexAttribStatic(gl, $gl.boundAttr.aColor, colors, 3, gl.FLOAT)
 
 	/** @type {[number, number, number]} */
 	let camPos = [1.5, 1.5, 1.5]
@@ -242,8 +241,6 @@ async function main() {
 		// gl.vertexAttrib3f($gl.boundAttr.aColor, 1, 0, 0)
 		// $glImm.vertexAttribData(gl, $gl.boundAttr.aPosition, lines, 3, gl.FLOAT)
 		// gl.drawArrays(gl.LINES, 0, lines.length / 3)
-		$glImm.vertexAttribData(gl, $gl.boundAttr.aPosition, tris, 3, gl.FLOAT)
-		$glImm.vertexAttribData(gl, $gl.boundAttr.aColor, colors, 3, gl.FLOAT)
 		gl.drawArrays(gl.TRIANGLES, 0, tris.length / 3)
 	}
 }
