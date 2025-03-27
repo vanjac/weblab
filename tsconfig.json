@@ -7,12 +7,14 @@
 		"checkJs": true,
 		"skipLibCheck": false,
 		"noEmit": true,
-		"composite": true,
-		"outDir": "build",
+		"pretty": false,
 
 		"strict": true,
 		"noImplicitAny": false,
 		"strictNullChecks": false,
 		"noImplicitReturns": true
-	}
+	},
+	"exclude": [
+		"./lib"
+	]
 }
