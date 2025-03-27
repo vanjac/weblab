@@ -69,7 +69,7 @@ async function main() {
 
 	gl.useProgram(prog.program)
 
-	let proj = $mat4.perspective(Math.PI / 2, width/height, 0.03)
+	let proj = $mat4.perspective(width/height, 0.03)
 
 	let planePos = new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1])
 	let planeUV = new Float32Array([0,0, 1,0, 0,1, 0,1, 1,0, 1,1])

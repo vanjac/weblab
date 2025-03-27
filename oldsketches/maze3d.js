@@ -192,12 +192,7 @@ function draw() {
  * @param {number} rotation
  */
 function cameraPoint(x, y, rotation) {
-	let cameraY = height/2.0
-	let fov = 95 * Math.PI / 180
-	let cameraZ = cameraY / Math.tan(fov / 2.0)
-	let aspect = width / height
-
-	let proj = $mat4.perspective(fov, aspect, cameraZ/50.0)
+	let proj = $mat4.perspective(width/height, 1/50.0, 0.92)
 	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj.toFloat32Array())
 	let view = new DOMMatrix()
 	view.rotateAxisAngleSelf(0, 0, 1, -rotation * 180 / Math.PI + 90)
