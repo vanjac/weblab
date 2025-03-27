@@ -3,7 +3,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
-import * as $glImm from '../lib/glImm.js'
 import * as $input from '../lib/input.js'
 /** @typedef {[number, number, number]} Color */
 
@@ -96,6 +95,8 @@ let walls
 let canvas
 /** @type {WebGL2RenderingContext} */
 let gl
+/** @type {$gl.VertexBufferCache} */
+let glCache
 /** @type {$gl.ProgramInfo} */
 let prog
 
@@ -117,6 +118,7 @@ function setup() {
 	gl.uniformMatrix4fv(prog.uniforms.uViewMat, false, ident)
 	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, ident)
 	gl.enableVertexAttribArray($gl.boundAttr.aPosition)
+	glCache = $gl.makeVertexBufferCache(gl)
 
 	walls = []
 	makeMaze()
@@ -181,7 +183,7 @@ function draw() {
 		xMax, yMax, wallHeight/2,
 		0, yMax, wallHeight/2,
 	])
-	$glImm.vertexAttribData(gl, $gl.boundAttr.aPosition, vertices, 3, gl.FLOAT)
+	$gl.vertexAttribData(glCache, $gl.boundAttr.aPosition, vertices, 3, gl.FLOAT)
 	gl.drawArrays(gl.TRIANGLE_FAN, 0, 4)
 }
 
@@ -215,7 +217,7 @@ function wall(x1, y1, x2, y2, c) {
 		x2, y2, wallHeight/2,
 		x2, y2, -wallHeight/2,
 	])
-	$glImm.vertexAttribData(gl, $gl.boundAttr.aPosition, vertices, 3, gl.FLOAT)
+	$gl.vertexAttribData(glCache, $gl.boundAttr.aPosition, vertices, 3, gl.FLOAT)
 	gl.drawArrays(gl.TRIANGLE_FAN, 0, 4)
 	gl.vertexAttrib3fv($gl.boundAttr.aColor, rgb(0, 0, 0))
 	gl.drawArrays(gl.LINE_LOOP, 0, 4)
