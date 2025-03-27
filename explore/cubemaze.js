@@ -2,7 +2,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
-import * as $mat4 from '../lib/mat4.js'
 import * as $input from '../lib/input.js'
 
 let width = 1024
@@ -187,7 +186,7 @@ async function main() {
 	])
 	gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, new DOMMatrix().toFloat32Array())
 
-	let proj = $mat4.perspective(width/height, 0.03)
+	let proj = $gl.perspective(width/height, 0.03)
 	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj.toFloat32Array())
 
 	let [lines, tris, colors] = generateMaze()

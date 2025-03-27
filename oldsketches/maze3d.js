@@ -4,7 +4,6 @@
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
 import * as $glImm from '../lib/glImm.js'
-import * as $mat4 from '../lib/mat4.js'
 import * as $input from '../lib/input.js'
 /** @typedef {[number, number, number]} Color */
 
@@ -192,7 +191,7 @@ function draw() {
  * @param {number} rotation
  */
 function cameraPoint(x, y, rotation) {
-	let proj = $mat4.perspective(width/height, 1/50.0, 0.92)
+	let proj = $gl.perspective(width/height, 1/50.0, 0.92)
 	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj.toFloat32Array())
 	let view = new DOMMatrix()
 	view.rotateAxisAngleSelf(0, 0, 1, -rotation * 180 / Math.PI + 90)

@@ -2,7 +2,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
-import * as $mat4 from '../lib/mat4.js'
 
 let width = 1024
 let height = 768
@@ -69,7 +68,7 @@ async function main() {
 
 	gl.useProgram(prog.program)
 
-	let proj = $mat4.perspective(width/height, 0.03)
+	let proj = $gl.perspective(width/height, 0.03)
 
 	let planePos = new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1])
 	let planeUV = new Float32Array([0,0, 1,0, 0,1, 0,1, 1,0, 1,1])
