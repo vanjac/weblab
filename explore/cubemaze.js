@@ -188,7 +188,7 @@ async function main() {
 	gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, new DOMMatrix().toFloat32Array())
 
 	let proj = $mat4.perspective(Math.PI / 2, width/height, 0.03)
-	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj)
+	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj.toFloat32Array())
 
 	let [lines, tris, colors] = generateMaze()
 	$gl.vertexAttribStatic(gl, $gl.boundAttr.aPosition, tris, 3, gl.FLOAT)

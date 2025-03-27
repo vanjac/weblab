@@ -96,7 +96,7 @@ async function main() {
 		gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, modelMat)
 		gl.uniformMatrix3fv(prog.uniforms.uTexMat0, false, texMat)
 		if (world) {
-			gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj)
+			gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj.toFloat32Array())
 			let viewMat = new DOMMatrix()
 			viewMat.translateSelf(0, viewDist, 0)
 			viewMat.rotateAxisAngleSelf(0, 0, 1, time / 1000 * rotateSpeed * 180 / Math.PI)

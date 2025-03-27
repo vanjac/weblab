@@ -197,7 +197,8 @@ function cameraPoint(x, y, rotation) {
 	let cameraZ = cameraY / Math.tan(fov / 2.0)
 	let aspect = width / height
 
-	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, $mat4.perspective(fov, aspect, cameraZ/50.0))
+	let proj = $mat4.perspective(fov, aspect, cameraZ/50.0)
+	gl.uniformMatrix4fv(prog.uniforms.uProjMat, false, proj.toFloat32Array())
 	let view = new DOMMatrix()
 	view.rotateAxisAngleSelf(0, 0, 1, -rotation * 180 / Math.PI + 90)
 	view.translateSelf(-x, -y, 0)
