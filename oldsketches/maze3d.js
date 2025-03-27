@@ -3,7 +3,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
-import * as $input from '../lib/input.js'
 /** @typedef {[number, number, number]} Color */
 
 let width = 960

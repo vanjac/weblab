@@ -1,7 +1,6 @@
 // Date: 2024-10-30
 
 import * as $html from '../lib/html.js'
-import * as $input from '../lib/input.js'
 
 let width = 512
 let height = 512

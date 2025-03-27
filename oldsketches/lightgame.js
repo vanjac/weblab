@@ -2,7 +2,6 @@
 // Ported to JS: 2024-10-16
 
 import * as $html from '../lib/html.js'
-import * as $input from '../lib/input.js'
 
 let width = 300
 let height = 300

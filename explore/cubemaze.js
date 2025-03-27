@@ -2,7 +2,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
-import * as $input from '../lib/input.js'
 
 let width = 1024
 let height = 768
