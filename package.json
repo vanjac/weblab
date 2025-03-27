@@ -3,6 +3,6 @@
 		"typescript": "^5.7.3"
 	},
 	"scripts": {
-		"types": "tsc --project ./jsconfig.json --pretty false"
+		"types": "tsc --build . --pretty false"
 	}
 }
