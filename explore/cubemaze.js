@@ -183,8 +183,8 @@ async function main() {
 	let gl = canvas.getContext('webgl2')
 	gl.enable(gl.DEPTH_TEST)
 	let prog = $gl.createProgram(gl, [
-		$glShader.basicVert(gl, {transform: true}),
-		$glShader.basicFrag(gl),
+		$gl.vertShader(gl, $glShader.basicVert, 'kTransform'),
+		$gl.fragShader(gl, $glShader.basicFrag),
 	])
 	gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, new DOMMatrix().toFloat32Array())
 

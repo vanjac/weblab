@@ -64,8 +64,8 @@ async function main() {
 	let glAniso = gl.getExtension('EXT_texture_filter_anisotropic')
 
 	let prog = $gl.createProgram(gl, [
-		$glShader.basicVert(gl, {transform: true, texMat: true}),
-		$glShader.basicFrag(gl, {texture: true}),
+		$gl.vertShader(gl, $glShader.basicVert, 'kTransform', 'kTexMat'),
+		$gl.fragShader(gl, $glShader.basicFrag, 'kTexture'),
 	])
 
 	gl.useProgram(prog.program)

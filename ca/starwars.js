@@ -30,8 +30,8 @@ async function main() {
 
 	let shaderSrc = await fetch(import.meta.resolve('./starwars.frag')).then(r => r.text())
 	let prog = $gl.createProgram(gl, [
-		$gl.createShader(gl, shaderSrc),
-		$glShader.basicVert(gl),
+		$gl.fragShader(gl, shaderSrc),
+		$gl.vertShader(gl, $glShader.basicVert),
 	])
 
 	gl.bindTexture(gl.TEXTURE_2D, gl.createTexture())

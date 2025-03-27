@@ -37,7 +37,10 @@ async function main() {
 	$gl.vertexAttribStatic(gl, $gl.boundAttr.aTexCoord0, uvData, 2, gl.FLOAT)
 
 	let shaderSrc = await fetch(import.meta.resolve('./scanlines.frag')).then(r => r.text())
-	let prog = $gl.createProgram(gl, [$gl.createShader(gl, shaderSrc), $glShader.basicVert(gl)])
+	let prog = $gl.createProgram(gl, [
+		$gl.fragShader(gl, shaderSrc),
+		$gl.vertShader(gl, $glShader.basicVert)
+	])
 
 	let audioCtx = new AudioContext()
 	let splitter = audioCtx.createChannelSplitter(numChannels)
