@@ -2,7 +2,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
-import * as $glShader from '../lib/glShader.js'
 import * as $mat4 from '../lib/mat4.js'
 
 let width = 1024
@@ -64,8 +63,8 @@ async function main() {
 	let glAniso = gl.getExtension('EXT_texture_filter_anisotropic')
 
 	let prog = $gl.createProgram(gl, [
-		$gl.vertShader(gl, $glShader.basicVert, 'kTransform', 'kTexMat'),
-		$gl.fragShader(gl, $glShader.basicFrag, 'kTexture'),
+		$gl.vertShader(gl, $gl.basicVert, 'kTransform', 'kTexMat'),
+		$gl.fragShader(gl, $gl.basicFrag, 'kTexture'),
 	])
 
 	gl.useProgram(prog.program)

@@ -3,7 +3,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
-import * as $glShader from '../lib/glShader.js'
 import * as $glImm from '../lib/glImm.js'
 import * as $mat4 from '../lib/mat4.js'
 import * as $input from '../lib/input.js'
@@ -111,8 +110,8 @@ function setup() {
 	gl = canvas.getContext('webgl2')
 	gl.enable(gl.DEPTH_TEST)
 	prog = $gl.createProgram(gl, [
-		$gl.vertShader(gl, $glShader.basicVert, 'kTransform'),
-		$gl.fragShader(gl, $glShader.basicFrag),
+		$gl.vertShader(gl, $gl.basicVert, 'kTransform'),
+		$gl.fragShader(gl, $gl.basicFrag),
 	])
 	let ident = new DOMMatrix().toFloat32Array()
 	gl.uniformMatrix4fv(prog.uniforms.uModelMat, false, ident)

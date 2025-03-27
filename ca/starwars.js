@@ -2,7 +2,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
-import * as $glShader from '../lib/glShader.js'
 
 let width = 768
 let height = 768
@@ -31,7 +30,7 @@ async function main() {
 	let shaderSrc = await fetch(import.meta.resolve('./starwars.frag')).then(r => r.text())
 	let prog = $gl.createProgram(gl, [
 		$gl.fragShader(gl, shaderSrc),
-		$gl.vertShader(gl, $glShader.basicVert),
+		$gl.vertShader(gl, $gl.basicVert),
 	])
 
 	gl.bindTexture(gl.TEXTURE_2D, gl.createTexture())

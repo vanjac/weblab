@@ -2,7 +2,6 @@
 
 import * as $html from '../lib/html.js'
 import * as $gl from '../lib/gl.js'
-import * as $glShader from '../lib/glShader.js'
 
 let width = 512
 let height = 512
@@ -39,7 +38,7 @@ async function main() {
 	let shaderSrc = await fetch(import.meta.resolve('./scanlines.frag')).then(r => r.text())
 	let prog = $gl.createProgram(gl, [
 		$gl.fragShader(gl, shaderSrc),
-		$gl.vertShader(gl, $glShader.basicVert)
+		$gl.vertShader(gl, $gl.basicVert)
 	])
 
 	let audioCtx = new AudioContext()
