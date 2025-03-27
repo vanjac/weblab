@@ -1,7 +1,6 @@
 // Date: 2024-11-05
 
 import * as $html from '../lib/html.js'
-import * as $gl from '../lib/gl.js'
 
 let width = 1024
 let height = 768

@@ -2,7 +2,6 @@
 // Ported to JS: 2024-10-18
 
 import * as $html from '../lib/html.js'
-import * as $gl from '../lib/gl.js'
 /** @typedef {[number, number, number]} Color */
 
 let width = 960
@@ -94,9 +93,9 @@ let walls
 let canvas
 /** @type {WebGL2RenderingContext} */
 let gl
-/** @type {$gl.VertexBufferCache} */
+/** @type {GLVertexBufferCache} */
 let glCache
-/** @type {$gl.ProgramInfo} */
+/** @type {GLProgramInfo} */
 let prog
 
 function setup() {
