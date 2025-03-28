@@ -1,11 +1,13 @@
 // Date: 2016-04-16
 // Ported to JS: 2024-10-18
 
-import * as $html from '../lib/html.js'
+'use strict'
+
 /** @typedef {[number, number, number]} Color */
 
-let width = 960
-let height = 640
+let canvas = document.querySelector('canvas')
+let width = canvas.width
+let height = canvas.height
 
 let OTHER = 0
 let HORIZ = 1
@@ -89,8 +91,6 @@ class Wall {
 /** @type {Wall[]} */
 let walls
 
-/** @type {HTMLCanvasElement} */
-let canvas
 /** @type {WebGL2RenderingContext} */
 let gl
 /** @type {GLVertexBufferCache} */
@@ -99,12 +99,6 @@ let glCache
 let prog
 
 function setup() {
-	canvas = $html.canvas({width, height})
-	document.body.append(
-		canvas,
-		$html.button({onclick: () => canvas.requestFullscreen()}, ['Fullscreen'])
-	)
-
 	gl = canvas.getContext('webgl2')
 	gl.enable(gl.DEPTH_TEST)
 	prog = $gl.createProgram(gl, [

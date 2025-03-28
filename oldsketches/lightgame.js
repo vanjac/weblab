@@ -1,10 +1,11 @@
 // Date: 2013-12-07
 // Ported to JS: 2024-10-16
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 300
-let height = 300
+let canvas = document.querySelector('canvas')
+let width = canvas.width
+let height = canvas.height
 
 let numSquares = 10
 let squareSize = 30
@@ -66,7 +67,6 @@ class LightSquare {
 }
 
 function setup() {
-	let canvas = document.body.appendChild($html.canvas({width, height}))
 	ctx = canvas.getContext('2d')
 	ctx.translate(.5, .5)
 	ctx.fillStyle = cBackground

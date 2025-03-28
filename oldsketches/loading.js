@@ -1,10 +1,11 @@
 // Date: 2015-05-21
 // Ported to JS: 2024-10-16
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 192
-let height = 192
+let canvas = document.querySelector('canvas')
+let width = canvas.width
+let height = canvas.height
 
 let STROKE_WIDTH = 6
 let NORMAL_RADIUS = 128
@@ -21,7 +22,6 @@ let stopMillis = -1
 let ctx
 
 function setup() {
-	let canvas = document.body.appendChild($html.canvas({width, height}))
 	ctx = canvas.getContext('2d')
 	ctx.font = '12px sans-serif'
 }

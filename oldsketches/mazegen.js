@@ -1,16 +1,16 @@
 // Date: 2016-03-05
 // Ported to JS: 2024-10-16
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 640
-let height = 640
+let canvas = document.querySelector('canvas')
+let width = canvas.width
+let height = canvas.height
 
 /** @type {CanvasRenderingContext2D} */
 let ctx
 
 function setup() {
-	let canvas = document.body.appendChild($html.canvas({width, height}))
 	ctx = canvas.getContext('2d')
 	ctx.fillStyle = 'black'
 	ctx.fillRect(0, 0, width, height)
