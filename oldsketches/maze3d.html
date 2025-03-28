@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
-<style>
-	canvas {
-		display: block;
-		margin: auto;
-	}
-</style>
-<canvas width="960" height="640"></canvas>
-<button onclick="canvas.requestFullscreen()">Fullscreen</button>
-<script src="../lib/gl.js"></script>
-<script src="../lib/input.js"></script>
-<script src="maze3d.js"></script>
+<body style="text-align: center">
+	<canvas width="960" height="640" style="1px solid currentColor"></canvas>
+	<div>
+		<button onclick="canvas.requestFullscreen()">Fullscreen</button>
+	</div>
+	<script src="../lib/gl.js"></script>
+	<script src="../lib/input.js"></script>
+	<script src="maze3d.js"></script>
+</body>

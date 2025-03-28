@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
-<style>
-	body {
-		max-width: max-content;
-		margin: auto;
-	}
-	canvas {
-		display: block;
-		border: 1px solid currentColor;
-	}
-</style>
-<canvas width="1024" height="768"></canvas>
-<div id="modelMat" style="display: inline-block"></div>
-<span style="display: inline-block; width: 20pt"></span>
-<div id="texMat" style="display: inline-block"></div>
-<input id="worldCheck" type="checkbox" checked oninput="world = this.checked">
-<script src="../lib/gl.js"></script>
-<script src="matrix.js"></script>
+<body style="text-align: center">
+	<canvas width="1024" height="768" style="border: 1px solid currentColor"></canvas>
+	<div>
+		<div id="modelMat" style="display: inline-block"></div>
+		<span style="display: inline-block; width: 20pt"></span>
+		<div id="texMat" style="display: inline-block"></div>
+		<input id="worldCheck" type="checkbox" checked oninput="world = this.checked">
+	</div>
+	<script src="../lib/gl.js"></script>
+	<script src="matrix.js"></script>
+</body>
