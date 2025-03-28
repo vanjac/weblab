@@ -6,8 +6,7 @@
 /** @typedef {[number, number, number]} Color */
 
 let canvas = document.querySelector('canvas')
-let width = canvas.width
-let height = canvas.height
+let {width, height} = canvas
 
 let OTHER = 0
 let HORIZ = 1

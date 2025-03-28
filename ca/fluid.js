@@ -1,9 +1,9 @@
 // Date: 2024-10-28
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 256
-let height = 256
+let canvas = document.querySelector('canvas')
+let {width, height} = canvas
 
 let fillRate = 10
 
@@ -24,26 +24,15 @@ function idx(x, y) {
 }
 
 async function main() {
-	let canvas = $html.canvas({width, height})
-	canvas.style.touchAction = 'pinch-zoom'
-	canvas.style.imageRendering = 'pixelated'
-	canvas.style.width = `${width * 2}px`
-	canvas.style.height = `${height * 2}px`
 	let ctx = canvas.getContext('2d')
 	let imageData = ctx.createImageData(width, height)
 
-	let spreadRange = $html.input({
-		type: 'range',
-		min: Math.log(0.01).toString(),
-		max: Math.log(999).toString(),
-		step: 'any',
-		style: 'flex-grow: 1;',
-		valueAsNumber: Math.log(spreadRatio),
-	})
-	let spreadNum = $html.input({
-		type: 'number',
-		valueAsNumber: spreadRatio,
-	})
+	/** @type {HTMLInputElement} */
+	let spreadRange = document.querySelector('#spreadRange')
+	/** @type {HTMLInputElement} */
+	let spreadNum = document.querySelector('#spreadNum')
+	spreadRange.valueAsNumber = Math.log(spreadRatio)
+	spreadNum.valueAsNumber = spreadRatio
 	spreadRange.addEventListener('input', () => {
 		spreadRatio = Math.exp(spreadRange.valueAsNumber)
 		spreadNum.valueAsNumber = spreadRatio
@@ -52,9 +41,6 @@ async function main() {
 		spreadRatio = spreadNum.valueAsNumber
 		spreadRange.valueAsNumber = Math.log(spreadRatio)
 	})
-	let flex = $html.span({style: 'display: flex'}, [spreadRange, spreadNum])
-
-	document.body.append(canvas, flex)
 
 	while (true) {
 		await new Promise(r => requestAnimationFrame(r))

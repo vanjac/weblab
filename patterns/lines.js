@@ -1,12 +1,11 @@
 // Date: 2023-10-05
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 400
-let height = 400
+let canvas = document.querySelector('canvas')
+let {width, height} = canvas
 
 async function main() {
-	let canvas = document.body.appendChild($html.canvas({width, height}))
 	let ctx = canvas.getContext('2d')
 	ctx.filter = 'blur(1px) brightness(200%)'
 
@@ -15,7 +14,7 @@ async function main() {
 		let time = await new Promise(r => requestAnimationFrame(r))
 
 		ctx.fillStyle = '#011'
-		ctx.fillRect(0, 0, canvas.width, canvas.height)
+		ctx.fillRect(0, 0, width, height)
 
 		ctx.strokeStyle = '#55f'
 		ctx.lineWidth = 2

@@ -1,24 +1,23 @@
 // Date: 2024-10-19
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 768
-let height = 768
+let canvas = document.querySelector('canvas')
+let {width, height} = canvas
 
 function initialPattern() {
-	let canvas = $html.canvas({width, height})
-	let ctx = canvas.getContext('2d')
+	let gfx = document.createElement('canvas')
+	Object.assign(gfx, {width, height})
+	let ctx = gfx.getContext('2d')
 	ctx.fillStyle = 'black'
 	ctx.fillRect(0, 0, width, height)
 	ctx.fillStyle = 'red'
 	ctx.fillRect(width/2 - 1, height/2 - 1, 2, 2)
 	// ctx.fillRect(width/2 + 1, height/2 - 1, 1, 1)
-	return canvas
+	return gfx
 }
 
 async function main() {
-	let canvas = document.body.appendChild($html.canvas({width, height}))
-	canvas.style.imageRendering = 'pixelated'
 	let gl = canvas.getContext('webgl2')
 
 	let posData = new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1])
@@ -26,7 +25,7 @@ async function main() {
 	$gl.vertexAttribStatic(gl, $gl.boundAttr.aPosition, posData, 2, gl.FLOAT)
 	$gl.vertexAttribStatic(gl, $gl.boundAttr.aTexCoord0, uvData, 2, gl.FLOAT)
 
-	let shaderSrc = await fetch(import.meta.resolve('./starwars.frag')).then(r => r.text())
+	let shaderSrc = await fetch('./starwars.frag').then(r => r.text())
 	let prog = $gl.createProgram(gl, [
 		$gl.fragShader(gl, shaderSrc),
 		$gl.vertShader(gl, $gl.basicVert),

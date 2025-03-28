@@ -1,9 +1,9 @@
 // Date: 2024-10-20
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 768
-let height = 768
+let canvas = document.querySelector('canvas')
+let {width, height} = canvas
 
 let xScroll = -.04
 let yScroll = -.03
@@ -23,10 +23,10 @@ function mod(a, b) {
 }
 
 async function main() {
-	let canvas = document.body.appendChild($html.canvas({width, height}))
 	let ctx = canvas.getContext('2d')
 
-	let bgCanvas = $html.canvas({width, height})
+	let bgCanvas = document.createElement('canvas')
+	Object.assign(bgCanvas, {width, height})
 	let bgCtx = bgCanvas.getContext('2d')
 
 	while (true) {

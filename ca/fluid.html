@@ -14,7 +14,14 @@
 	canvas {
 		display: block;
 		border: 1px solid currentColor;
+		touch-action: pinch-zoom;
+		image-rendering: pixelated;
 	}
 </style>
+<canvas width="256" height="256" style="width: 512px; height: 512px"></canvas>
+<span style="display: flex">
+	<input id="spreadRange" type="range" min="0.01" max="999" step="any" style="flex-grow: 1">
+	<input id="spreadNum" type="number">
+</span>
 <script src="../lib/input.js"></script>
-<script type="module" src="fluid.js"></script>
+<script src="fluid.js"></script>

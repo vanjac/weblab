@@ -1,9 +1,9 @@
 // Date: 2024-10-30
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 512
-let height = 512
+let canvas = document.querySelector('canvas')
+let {width, height} = canvas
 
 let bgCol = 'black'
 let traceColLight = 60
@@ -37,8 +37,6 @@ let traces = [
 ]
 
 async function main() {
-	let canvas = document.body.appendChild($html.canvas({width, height}))
-	canvas.style.touchAction = 'pinch-zoom'
 	let ctx = canvas.getContext('2d')
 
 	ctx.fillStyle = bgCol

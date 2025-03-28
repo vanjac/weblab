@@ -4,8 +4,7 @@
 'use strict'
 
 let canvas = document.querySelector('canvas')
-let width = canvas.width
-let height = canvas.height
+let {width, height} = canvas
 
 let numSquares = 10
 let squareSize = 30

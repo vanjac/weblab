@@ -1,9 +1,9 @@
 // Date: 2024-11-05
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 1024
-let height = 768
+let canvas = document.querySelector('canvas')
+let {width, height} = canvas
 
 let mazeDim = 12
 
@@ -67,7 +67,7 @@ function vecAdd([a0, a1, a2], [b0, b1, b2]) {
  * @param {readonly number[]} a
  * @param {readonly number[]} b
  */
-export function vecEq(a, b) {
+function vecEq(a, b) {
 	return a.every((e, i) => e == b[i])
 }
 
@@ -170,12 +170,6 @@ function moveCamera(camPos, invLookMat, vec) {
 }
 
 async function main() {
-	let canvas = $html.canvas({width, height})
-	document.body.append(
-		canvas,
-		$html.button({onclick: () => canvas.requestFullscreen()}, ['Fullscreen']),
-	)
-
 	let gl = canvas.getContext('webgl2')
 	gl.enable(gl.DEPTH_TEST)
 	let prog = $gl.createProgram(gl, [

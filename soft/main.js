@@ -1,5 +1,3 @@
-import * as $html from '../lib/html.js'
-
 const doctype = '<!DOCTYPE html>'
 
 /** @type {HTMLIFrameElement} */
@@ -133,7 +131,8 @@ function onKeyDown(e) {
  */
 function pickFiles(accept = '') {
 	return new Promise((resolve, reject) => {
-		let input = $html.input({type: 'file', accept})
+		let input = document.createElement('input')
+		Object.assign(input, {type: 'file', accept})
 		input.addEventListener('change', () => {
 			resolve(Array.from(input.files))
 		})

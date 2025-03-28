@@ -1,9 +1,9 @@
 // Date: 2024-11-14
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 1024
-let height = 768
+let canvas = document.querySelector('canvas')
+let {width, height} = canvas
 
 let modelMat = new DOMMatrix().translate(0, 0, -1).toFloat32Array()
 let texMat = Float32Array.of(1, 0, 0, 0, 1, 0, 0, 0, 1)
@@ -13,15 +13,13 @@ let viewDist = 3
 let world = true
 
 async function main() {
-	let canvas = $html.canvas({width, height})
-
-	let modelMatDiv = document.createElement('div')
-	modelMatDiv.style = 'display: inline-block;'
+	let modelMatDiv = document.querySelector('#modelMat')
 	for (let row = 0; row < 4; row++) {
 		let div = modelMatDiv.appendChild(document.createElement('div'))
 		for (let col = 0; col < 4; col++) {
 			let idx = row + col * 4
-			let input = $html.input({type: 'number', min: '-99', max: '99', step: '.1'})
+			let input = document.createElement('input')
+			Object.assign(input, {type: 'number', min: '-99', max: '99', step: '.1'})
 			input.valueAsNumber = modelMat[idx]
 			if (col == 2) {
 				input.disabled = true
@@ -32,29 +30,18 @@ async function main() {
 		}
 	}
 
-	let texMatDiv = document.createElement('div')
-	texMatDiv.style = 'display: inline-block'
+	let texMatDiv = document.querySelector('#texMat')
 	for (let row = 0; row < 3; row++) {
 		let div = texMatDiv.appendChild(document.createElement('div'))
 		for (let col = 0; col < 3; col++) {
 			let idx = row + col * 3
-			let input = $html.input({type: 'number', min: '-99', max: '99', step: '.1'})
+			let input = document.createElement('input')
+			Object.assign(input, {type: 'number', min: '-99', max: '99', step: '.1'})
 			input.valueAsNumber = texMat[idx]
 			input.oninput = () => texMat[idx] = input.valueAsNumber
 			div.appendChild(input)
 		}
 	}
-
-	let worldCheck = $html.input({type: 'checkbox', checked: world})
-	worldCheck.oninput = () => world = worldCheck.checked
-
-	document.body.append(
-		canvas,
-		modelMatDiv,
-		$html.span({style: 'display: inline-block; width: 20pt'}),
-		texMatDiv,
-		worldCheck,
-	)
 
 	let gl = canvas.getContext('webgl2')
 	gl.enable(gl.DEPTH_TEST)
@@ -74,7 +61,7 @@ async function main() {
 	$gl.vertexAttribStatic(gl, $gl.boundAttr.aPosition, planePos, 2, gl.FLOAT)
 	$gl.vertexAttribStatic(gl, $gl.boundAttr.aTexCoord0, planeUV, 2, gl.FLOAT)
 
-	let request = await fetch(import.meta.resolve('./five.png'))
+	let request = await fetch('./five.png')
 	let img = await request.blob().then(b => window.createImageBitmap(b))
 	gl.bindTexture(gl.TEXTURE_2D, gl.createTexture())
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img)

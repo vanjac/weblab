@@ -4,8 +4,7 @@
 'use strict'
 
 let canvas = document.querySelector('canvas')
-let width = canvas.width
-let height = canvas.height
+let {width, height} = canvas
 
 let STROKE_WIDTH = 6
 let NORMAL_RADIUS = 128

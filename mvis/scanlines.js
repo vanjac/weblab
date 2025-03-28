@@ -1,9 +1,8 @@
 // Date: 2024-10-25
 
-import * as $html from '../lib/html.js'
+'use strict'
 
-let width = 512
-let height = 512
+let canvas = document.querySelector('canvas')
 
 let texWidth = 32
 let texHeight = 64
@@ -12,29 +11,24 @@ let sampleSize = texWidth * texHeight
 let numChannels = 2
 
 async function main() {
-	let input = $html.input({type: 'file', accept: 'audio/*'})
+	let input = document.querySelector('input')
 
 	let src = new URLSearchParams(window.location.search).get('file')
-	let audio = document.createElement('audio')
-	Object.assign(audio, {controls: true, src})
-	audio.style.display = 'block'
-	audio.style.width = '100%'
+	let audio = document.querySelector('audio')
+	audio.src = src
 
 	input.addEventListener('change', () => {
 		audio.src = URL.createObjectURL(input.files[0])
 	})
 
-	let canvas = $html.canvas({width, height})
 	let gl = canvas.getContext('webgl2')
-
-	document.body.append(input, audio, canvas)
 
 	let posData = new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1])
 	let uvData = new Float32Array([0,0, 1,0, 0,1, 0,1, 1,0, 1,1])
 	$gl.vertexAttribStatic(gl, $gl.boundAttr.aPosition, posData, 2, gl.FLOAT)
 	$gl.vertexAttribStatic(gl, $gl.boundAttr.aTexCoord0, uvData, 2, gl.FLOAT)
 
-	let shaderSrc = await fetch(import.meta.resolve('./scanlines.frag')).then(r => r.text())
+	let shaderSrc = await fetch('./scanlines.frag').then(r => r.text())
 	let prog = $gl.createProgram(gl, [
 		$gl.fragShader(gl, shaderSrc),
 		$gl.vertShader(gl, $gl.basicVert)

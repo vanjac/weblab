@@ -4,8 +4,7 @@
 'use strict'
 
 let canvas = document.querySelector('canvas')
-let width = canvas.width
-let height = canvas.height
+let {width, height} = canvas
 
 /** @type {CanvasRenderingContext2D} */
 let ctx
