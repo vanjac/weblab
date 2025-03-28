@@ -3,21 +3,12 @@
 <meta name="color-scheme" content="dark">
 <style>
 	body {
-		font-family: system-ui, sans-serif;
 		max-width: max-content;
-		margin-left: auto;
-		margin-right: auto;
-	}
-	input {
-		font: inherit;
-	}
-	canvas {
-		display: block;
-		border: 1px solid currentColor;
+		margin: auto;
 	}
 </style>
 <input type="file" accept="audio/*">
 <audio style="display: block; width: 100%" controls></audio>
-<canvas width="512" height="512"></canvas>
+<canvas width="512" height="512" style="display: block"></canvas>
 <script src="../lib/gl.js"></script>
 <script src="scanlines.js"></script>
