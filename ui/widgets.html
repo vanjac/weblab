@@ -2,228 +2,234 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light dark">
 <style>
-    html {
-        font-family: system-ui, sans-serif;
-        line-height: 1.5;
-    }
-    pre, code, samp, kbd {
-        font-family: ui-monospace, monospace;
-    }
-    input, button, textarea, select, input::file-selector-button {
-        font: inherit;
-    }
-    button, select, label, legend, summary {
-        user-select: none;
-    }
-    img {
-        pointer-events: none;
-    }
-    button, input, select {
-        margin: 2px;
-    }
-    table.table {
-        border-collapse: collapse;
-    }
-    .table th, .table td {
-        border: 1px solid currentColor;
-        padding: 0.25em;
-    }
+	html {
+		font-family: system-ui, sans-serif;
+		line-height: 1.5;
+	}
+	pre, code, samp, kbd {
+		font-family: ui-monospace, monospace;
+	}
+	input, button, textarea, select, input::file-selector-button {
+		font: inherit;
+	}
+	button, select, label, legend, summary {
+		user-select: none;
+	}
+	img {
+		pointer-events: none;
+	}
+	button, input, select {
+		margin: 2px;
+	}
+	table.table {
+		border-collapse: collapse;
+	}
+	.table th, .table td {
+		border: 1px solid currentColor;
+		padding: 0.25em;
+	}
+
+	flex-row {
+		display: flex;
+	}
 </style>
 
 <div>
-    <label>
-        <input id="disabled" type="checkbox">
-        Disabled
-    </label>
+	<label>
+		<input id="disabled" type="checkbox">
+		Disabled
+	</label>
 </div>
 <fieldset>
-    <legend>Buttons</legend>
+	<legend>Buttons</legend>
 
-    <div style="display: flex">
-        <button>Button</button>
-        <input type="reset">
-        <input type="submit">
-    </div>
-    <input type="file">
+	<flex-row>
+		<button>Button</button>
+		<input type="reset">
+		<input type="submit">
+	</flex-row>
 </fieldset>
 <fieldset>
-    <legend>Inputs</legend>
+	<legend>Inputs</legend>
 
-    <label>
-        <input type="checkbox">
-        Checkbox
-    </label>
-    <br>
-    <label>
-        <input type="radio" name="radio">
-        Option 1
-    </label>
-    <br>
-    <label>
-        <input type="radio" name="radio">
-        Option 2
-    </label>
-    <br>
-    <label>
-        <input type="radio" name="radio">
-        Option 3
-    </label>
-    <div style="display: flex">
-        <input type="text" value="Text" list="text-list">
-        <datalist id="text-list">
-            <option value="Option 1"></option>
-            <option value="Option 2"></option>
-            <option value="Option 3"></option>
-        </datalist>
-        <input type="number" min="0" max="100" value="50">
-    </div>
-    <table>
-        <tr>
-            <td><label for="date">Date:</label></td>
-            <td><input id="date" type="datetime-local"></td>
-        </tr>
-        <tr>
-            <td><label for="range">Range:</label></td>
-            <td>
-                <input id="range" type="range" list="range-list">
-                <datalist id="range-list">
-                    <option value="0"></option>
-                    <option value="50"></option>
-                    <option value="100"></option>
-                </datalist>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="color">Color:</label></td>
-            <td><input type="color"></td>
-        </tr>
-    </table>
+	<label>
+		<input type="checkbox">
+		Checkbox
+	</label>
+	<br>
+	<label>
+		<input type="radio" name="radio">
+		Option 1
+	</label>
+	<br>
+	<label>
+		<input type="radio" name="radio">
+		Option 2
+	</label>
+	<br>
+	<label>
+		<input type="radio" name="radio">
+		Option 3
+	</label>
+	<flex-row>
+		<input type="text" value="Text" list="text-list">
+		<datalist id="text-list">
+			<option value="Option 1"></option>
+			<option value="Option 2"></option>
+			<option value="Option 3"></option>
+		</datalist>
+		<input type="number" min="0" max="100" value="50">
+	</flex-row>
+	<table>
+		<tr>
+			<td><label for="date">Date:</label></td>
+			<td><input id="date" type="datetime-local"></td>
+		</tr>
+		<tr>
+			<td><label for="range">Range:</label></td>
+			<td>
+				<input id="range" type="range" list="range-list">
+				<datalist id="range-list">
+					<option value="0"></option>
+					<option value="50"></option>
+					<option value="100"></option>
+				</datalist>
+			</td>
+		</tr>
+		<tr>
+			<td><label for="color">Color:</label></td>
+			<td><input id="color" type="color"></td>
+		</tr>
+		<tr>
+			<td><label for="file">File:</label></td>
+			<td><input id="file" type="file"></td>
+		</tr>
+	</table>
 </fieldset>
 <fieldset>
-    <legend>Outputs</legend>
+	<legend>Outputs</legend>
 
-    <output>Output text</output>
-    <br>
-    <meter max="100" value="50"></meter>
-    <br>
-    <progress max="100" value="50"></progress>
+	<output>Output text</output>
+	<br>
+	<meter max="100" value="50"></meter>
+	<br>
+	<progress max="100" value="50"></progress>
 </fieldset>
 <fieldset>
-    <legend>Selects</legend>
+	<legend>Selects</legend>
 
-    <select>
-        <option>Option 1</option>
-        <optgroup label="More">
-            <option>Option 2</option>
-            <option>Option 3</option>
-        </optgroup>
-    </select>
-    <select id="dropdown" autocomplete="off">
-        <option disabled hidden selected>Dropdown</option>
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
-    </select>
-    <br>
-    <select multiple>
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <optgroup label="More">
-            <option>Option 3</option>
-            <option>Option 4</option>
-            <option>Option 5</option>
-        </optgroup>
-    </select>
+	<select>
+		<option>Option 1</option>
+		<optgroup label="More">
+			<option>Option 2</option>
+			<option>Option 3</option>
+		</optgroup>
+	</select>
+	<select id="dropdown" autocomplete="off">
+		<option disabled hidden selected>Dropdown</option>
+		<option>Option 1</option>
+		<option>Option 2</option>
+		<option>Option 3</option>
+	</select>
+	<br>
+	<select multiple>
+		<option>Option 1</option>
+		<option>Option 2</option>
+		<optgroup label="More">
+			<option>Option 3</option>
+			<option>Option 4</option>
+			<option>Option 5</option>
+		</optgroup>
+	</select>
 </fieldset>
 <fieldset>
-    <legend>Text Area</legend>
+	<legend>Text Area</legend>
 
-    <textarea>Text</textarea>
+	<textarea>Text</textarea>
 </fieldset>
 <fieldset>
-    <legend>Dialogs</legend>
+	<legend>Dialogs</legend>
 
-    <button id="dialog-open">Open</button>
-    <button id="dialog-modal">Modal</button>
-    <dialog>
-        <form method="dialog">
-        Hello!
-        <br>
-        <button>Close</button>
-        </form>
-    </dialog>
+	<button id="dialog-open">Open</button>
+	<button id="dialog-modal">Modal</button>
+	<dialog>
+		<form method="dialog">
+		Hello!
+		<br>
+		<button>Close</button>
+		</form>
+	</dialog>
 </fieldset>
 <fieldset>
-    <legend>Popover</legend>
+	<legend>Popover</legend>
 
-    <button popovertarget="popover">Toggle</button>
-    <div popover id="popover">Hello</div>
+	<button popovertarget="popover">Toggle</button>
+	<div popover id="popover">Hello</div>
 </fieldset>
 <fieldset>
-    <legend>Details</legend>
+	<legend>Details</legend>
 
-    <details>
-        <summary>
-            Summary
-        </summary>
-        Details
-    </details>
+	<details>
+		<summary>
+			Summary
+		</summary>
+		Details
+	</details>
 </fieldset>
 <fieldset>
-    <legend>Media</legend>
+	<legend>Media</legend>
 
-    <audio controls></audio>
+	<audio controls></audio>
 </fieldset>
 <fieldset>
-    <legend>Menu</legend>
+	<legend>Menu</legend>
 
-    Menu List:
-    <menu>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-    </menu>
+	<menu>
+		<li>Item 1</li>
+		<li>Item 2</li>
+		<li>Item 3</li>
+	</menu>
 </fieldset>
 <fieldset>
-    <legend>Editable Table</legend>
+	<legend>Editable Table</legend>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Col 1</th>
-                <th>Col 2</th>
-                <th>Col 3</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>1</th>
-                <td contenteditable="plaintext-only">Data 1</td>
-                <td contenteditable="plaintext-only">Data 2</td>
-                <td contenteditable="plaintext-only">Data 3</td>
-            </tr>
-            <tr>
-                <th>2</th>
-                <td contenteditable="plaintext-only">Data 1</td>
-                <td contenteditable="plaintext-only">Data 2</td>
-                <td contenteditable="plaintext-only">Data 3</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Col 1</th>
+				<th>Col 2</th>
+				<th>Col 3</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>1</th>
+				<td contenteditable="true">Data 1</td>
+				<td contenteditable="true">Data 2</td>
+				<td contenteditable="true">Data 3</td>
+			</tr>
+			<tr>
+				<th>2</th>
+				<td contenteditable="true">Data 1</td>
+				<td contenteditable="true">Data 2</td>
+				<td contenteditable="true">Data 3</td>
+			</tr>
+		</tbody>
+	</table>
 </fieldset>
 
 <script>
-    document.querySelector('#dropdown').addEventListener('change', ev => {
-        ev.target.selectedIndex = 0
-    })
-    document.querySelector('#disabled').addEventListener('change', ev => {
-        document.querySelectorAll('fieldset').forEach(el => {el.disabled = ev.target.checked})
-    })
-    document.querySelector('#dialog-open').addEventListener('click', () => {
-        document.querySelector('dialog').show()
-    })
-    document.querySelector('#dialog-modal').addEventListener('click', () => {
-        document.querySelector('dialog').showModal()
-    })
+	document.querySelector('#dropdown').addEventListener('change', ev => {
+		ev.target.selectedIndex = 0
+	})
+	document.querySelector('#disabled').addEventListener('change', ev => {
+		document.querySelectorAll('fieldset').forEach(el => {el.disabled = ev.target.checked})
+	})
+	document.querySelector('#dialog-open').addEventListener('click', () => {
+		document.querySelector('dialog').show()
+	})
+	document.querySelector('#dialog-modal').addEventListener('click', () => {
+		document.querySelector('dialog').showModal()
+	})
 </script>
