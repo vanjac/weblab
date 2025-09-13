@@ -15,8 +15,8 @@
 	button, select, label, legend, summary {
 		user-select: none;
 	}
-	.dropdown,
-	.dropdown::picker(select) {
+	select[role="menu"],
+	select[role="menu"]::picker(select) {
 		appearance: base-select;
 	}
 	img {
@@ -126,7 +126,7 @@
 			<option>Option 3</option>
 		</optgroup>
 	</select>
-	<select class="dropdown" autocomplete="off">
+	<select role="menu" autocomplete="off">
 		<option disabled hidden selected>Dropdown</option>
 		<option>Option 1</option>
 		<option>Option 2</option>
@@ -221,7 +221,7 @@
 </fieldset>
 
 <script>
-	document.querySelectorAll('.dropdown').forEach(el => {
+	document.querySelectorAll('select[role="menu"]').forEach(el => {
 		el.addEventListener('change', ev => {
 			ev.target.selectedIndex = 0
 		})
