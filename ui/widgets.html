@@ -15,6 +15,9 @@
 	button, select, label, legend, summary {
 		user-select: none;
 	}
+	.dropdown {
+		appearance: base-select;
+	}
 	img {
 		pointer-events: none;
 	}
@@ -122,7 +125,7 @@
 			<option>Option 3</option>
 		</optgroup>
 	</select>
-	<select id="dropdown" autocomplete="off">
+	<select class="dropdown" autocomplete="off">
 		<option disabled hidden selected>Dropdown</option>
 		<option>Option 1</option>
 		<option>Option 2</option>
@@ -217,8 +220,10 @@
 </fieldset>
 
 <script>
-	document.querySelector('#dropdown').addEventListener('change', ev => {
-		ev.target.selectedIndex = 0
+	document.querySelectorAll('.dropdown').forEach(el => {
+		el.addEventListener('change', ev => {
+			ev.target.selectedIndex = 0
+		})
 	})
 	document.querySelector('#disabled').addEventListener('change', ev => {
 		document.querySelectorAll('fieldset').forEach(el => {el.disabled = ev.target.checked})
