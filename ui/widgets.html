@@ -32,9 +32,32 @@
 		border: 1px solid currentColor;
 		padding: 0.25em;
 	}
-
+	.icon {
+		width: 1lh;
+		height: 1lh;
+		fill: currentColor;
+		vertical-align: top;
+	}
+	/* Layout util */
 	flex-row {
 		display: flex;
+		flex-direction: row;
+	}
+	flex-col {
+		display: flex;
+		flex-direction: column;
+	}
+	:where(flex-row, flex-col) > * {
+		flex-shrink: 0;
+	}
+	.flex-grow {
+		flex: 1 0 0;
+	}
+	.scroll {
+		overflow: auto;
+	}
+	.clip {
+		overflow: clip;
 	}
 </style>
 
@@ -119,20 +142,21 @@
 <fieldset>
 	<legend>Selects</legend>
 
-	<select>
-		<option>Option 1</option>
-		<optgroup label="More">
+	<flex-row>
+		<select>
+			<option>Option 1</option>
+			<optgroup label="More">
+				<option>Option 2</option>
+				<option>Option 3</option>
+			</optgroup>
+		</select>
+		<select role="menu" autocomplete="off">
+			<option disabled hidden selected>Dropdown</option>
+			<option>Option 1</option>
 			<option>Option 2</option>
 			<option>Option 3</option>
-		</optgroup>
-	</select>
-	<select role="menu" autocomplete="off">
-		<option disabled hidden selected>Dropdown</option>
-		<option>Option 1</option>
-		<option>Option 2</option>
-		<option>Option 3</option>
-	</select>
-	<br>
+		</select>
+	</flex-row>
 	<select multiple>
 		<option>Option 1</option>
 		<option>Option 2</option>
@@ -151,8 +175,10 @@
 <fieldset>
 	<legend>Dialogs</legend>
 
-	<button id="dialog-open">Open</button>
-	<button id="dialog-modal">Modal</button>
+	<flex-row>
+		<button id="dialog-open">Open</button>
+		<button id="dialog-modal">Modal</button>
+	</flex-row>
 	<dialog>
 		<form method="dialog">
 		Hello!
